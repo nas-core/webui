@@ -1,0 +1,75 @@
+<!-- 添加用户模态框 -->
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addUserModalLabel">添加用户</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addUserForm">
+          <div class="mb-3">
+            <label for="username" class="form-label">用户名</label>
+            <input type="text" class="form-control" id="addUsername" name="username">
+          </div>
+          <div class="mb-3">
+            <label for="passwd" class="form-label">密码
+              <input type="password" class="form-control" id="addPasswd" name="passwd">
+          </div>
+          <div class="mb-3">
+            <label for="home" class="form-label">主目录</label>
+            <input type="text" class="form-control" id="addHome" name="home">
+          </div>
+
+        </form>
+        <small class="form-text text-muted">
+          如需要配置管理员，请手动修改配置文件。<br>
+          这里操作的用户密码会被明文保存，请通知用户修改密码后会加密储存。<br>
+          目前只支持最多5个用户
+        </small>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="saveUserBtn">保存</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 编辑用户模态框 -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editUserModalLabel">编辑用户</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editUserForm">
+          <div class="mb-3">
+            <label for="editUsername" class="form-label">用户名</label>
+            <input type="text" class="form-control" id="editUsername" name="username" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="editPasswd" class="form-label">密码 </label>
+            <input type="password" class="form-control" id="editPasswd" name="passwd">
+          </div>
+          <div class="mb-3">
+            <label for="editHome" class="form-label">主目录</label>
+            <input type="text" class="form-control" id="editHome" name="home">
+          </div>
+        </form>
+        <small class="form-text text-muted">
+          如需要配置管理员，请手动修改配置文件。<br>
+          这里操作的用户密码会被明文保存，请通知用户修改密码后会加密储存。<br>
+          目前只支持最多5个用户
+        </small>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="updateUserBtn">保存</button>
+      </div>
+    </div>
+  </div>
+</div>

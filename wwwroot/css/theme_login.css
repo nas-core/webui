@@ -1,0 +1,113 @@
+/* nascore - 登录页面样式 */
+
+/* 登录页面布局 */
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1rem;
+  background-color: var(--bg-secondary);
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow);
+}
+
+/* 登录页面Logo */
+.login-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-logo i {
+  font-size: 4rem;
+  color: var(--text-primary);
+}
+
+.login-logo img {
+  max-width: 10rem;
+  height: auto;
+}
+
+.login-logo h1 {
+  color: var(--text-primary);
+  font-size: 1.75rem;
+  margin-top: 1rem;
+}
+
+/* 登录表单元素 */
+.login-form .form-control {
+  background-color: var(--bg-input);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.login-form .form-control:focus {
+  border-color: var(--btn-primary-bg);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.login-form .input-group-text {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+/* 保存的账号列表 */
+.saved-accounts-list {
+  margin-bottom: 1rem;
+}
+
+.saved-accounts-list .card {
+  background-color: var(--bg-card);
+  border-color: var(--border-color);
+  transition: opacity 0.3s ease;
+}
+
+.saved-accounts-list .card:hover {
+  background-color: var(--bg-hover);
+}
+
+.saved-accounts-list .card-body {
+  padding: 1rem;
+}
+
+.saved-accounts-list .bi {
+  font-size: 1.25rem;
+  width: 1.5rem;
+  text-align: center;
+}
+
+/* 记住密码提示框 */
+#rememberPasswordToast .toast-header {
+  background-color: var(--btn-primary-bg);
+  color: #fff;
+}
+
+#rememberPasswordToast .toast-body {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+/* 响应式适配 */
+@media (max-width: 576px) {
+  .login-form {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .login-logo img {
+    max-width: 8rem;
+  }
+
+  .login-logo h1 {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,186 @@
+<link rel="stylesheet" href="./css/caddyfile_editor.css">
+<div class="modal fade" id="fileEditorModalCaddy" tabindex="-1" aria-labelledby="fileEditorModalLabelCaddy"
+  aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-editor modal-resizable modal-draggable"
+    style="max-width: 80rem;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="fileEditorModalLabelCaddy">
+          <i class="bi bi-file-earmark-code me-2"></i>网站管理/反向代理
+
+          <small class="text-muted ms-2" id="currentEditFilePath"></small>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div id="visualEditorArea" style="display: block; padding: 1rem;">
+
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5>网站列表
+            </h5>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openAddSiteModal()">
+              <i class="bi bi-plus-circle me-1"></i>添加网站
+            </button>
+          </div>
+
+          <div class="table-responsive" style="overflow-y: auto;">
+            <div class="table-responsive2">
+              <table class="table table-bordered table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>地址 (域名:端口)</th>
+                    <th>类型</th>
+                    <th>详情</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="caddySiteListBody">
+                  <!-- Site items will be injected here by JavaScript -->
+                  <tr>
+                    <td colspan="3" class="text-center text-muted">暂无网站配置</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="manualEditorArea" style="display: none; padding: 1rem;">
+          <textarea id="CaddyfileEditorContent" class="form-control" spellcheck="false"></textarea>
+          <small>可视化编辑器功能支持的Caddyfile格式有限制，请参考官网模板来编辑</small>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div id="CaddyfileEditorStatus"></div>
+        <div>
+          <input type="checkbox" class="form-check-input" id="check_auto_https">
+          <label class="form-check-label" for="check_auto_https">
+            <small>自动配置HTTPS(无80/433端口不要开启)</small>
+          </label>
+        </div>
+
+        <button type="button" class="btn btn-info me-2" id="toggleEditorView"
+          onclick="toggleEditorView()">切换文本编辑模式</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-secondary" onclick="gotoCaddyBaseConfigPage()"
+          data-bs-dismiss="modal">caddy服务配置</button>
+
+        <button type="button" class="btn btn-success"
+          onclick="syncChangesToCaddyfileEditor();saveFileContent()">完成</button>
+        <button type="button" class="btn btn-success" onclick="reloadCaddy()">重载</button>
+
+        <div style="clear: both;"></div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<script>
+  function gotoCaddyBaseConfigPage() {
+    console.log("gotoCaddyBaseConfigPage");
+
+    //跳转锚点 #ThirdPartyExtCaddy2
+    window.location.hash = '#ThirdPartyExtCaddy2';
+  }
+</script>
+
+
+<!-- Add/Edit Site Modal -->
+<div class="modal fade" id="addEditSiteModal" tabindex="-1" aria-labelledby="addEditSiteModalLabel" aria-hidden="true"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addEditSiteModalLabel">添加/编辑网站配置</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="siteConfigForm">
+          <input type="hidden" id="editSiteIndex">
+
+          <div class="mb-3">
+            <label for="siteAddress" class="form-label">网站地址 (域名:端口)</label>
+            <input type="text" class="form-control" id="siteAddress" placeholder="e.g. http://example.com:8080 或 :80">
+            <div class="form-text">可以是域名、IP、或仅端口 (如: `:8080`)。前缀 `http://` 或 `https://` 是可选的。</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="siteType" class="form-label">网站类型</label>
+            <select class="form-select" id="siteType" onchange="toggleSiteTypeFields()">
+              <option value="respond">响应文本</option>
+              <option value="file_server">静态文件服务</option>
+              <option value="reverse_proxy">反向代理</option>
+            </select>
+          </div>
+
+          <div id="respondFields" class="site-type-fields mb-3">
+            <label for="respondContent" class="form-label">响应内容</label>
+            <textarea class="form-control" id="respondContent" rows="3" placeholder="例如: Hello from Caddy!"></textarea>
+          </div>
+
+          <div id="fileServerFields" class="site-type-fields mb-3" style="display: none;">
+            <label for="fileServerRoot" class="form-label">静态文件根目录</label>
+            <input type="text" class="form-control" id="fileServerRoot" placeholder="例如: /home/user/www">
+          </div>
+
+          <div id="reverseProxyFields" class="site-type-fields mb-3" style="display: none;">
+            <label for="proxyTarget" class="form-label">反向代理目标地址</label>
+            <input type="text" class="form-control" id="proxyTarget" placeholder="例如: http://localhost:8081">
+            <div class="form-check mt-2">
+              <input class="form-check-input" type="checkbox" id="tlsInsecureSkipVerify">
+              <label class="form-check-label" for="tlsInsecureSkipVerify">忽略后端TLS证书错误
+                (tls_insecure_skip_verify)</label>
+            </div>
+          </div>
+
+          <hr>
+
+          <h5>可选配置</h5>
+
+          <div class="mb-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="enableBasicAuth" onchange="toggleBasicAuthFields()">
+              <label class="form-check-label" for="enableBasicAuth">启用Basic Auth</label>
+            </div>
+            <div id="basicAuthFields" style="display: none;">
+              <div class="mb-3 mt-2">
+                <label for="authUsername" class="form-label">用户名</label>
+                <input type="text" class="form-control" id="authUsername">
+              </div>
+              <div class="mb-3">
+                <label for="authPassword" class="form-label">密码</label>
+                <input type="password" class="form-control" id="authPassword">
+                <div class="form-text">Caddyfile中密码会以bcrypt加密形式保存。</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="enableTls" onchange="toggleTlsFields()">
+              <label class="form-check-label" for="enableTls">启用TLS (HTTPS)</label>
+            </div>
+            <div id="tlsFields" style="display: none;">
+              <div class="mb-3 mt-2">
+                <label for="tlsCertPath" class="form-label">TLS 证书路径 (.crt)</label>
+                <input type="text" class="form-control" id="tlsCertPath" placeholder="例如: /path/to/cert.crt">
+              </div>
+              <div class="mb-3">
+                <label for="tlsKeyPath" class="form-label">TLS 密钥路径 (.key)</label>
+                <input type="text" class="form-control" id="tlsKeyPath" placeholder="例如: /path/to/key.key">
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" onclick="saveSiteConfig()">保存网站</button>
+      </div>
+    </div>
+  </div>
+</div>

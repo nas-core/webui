@@ -1,0 +1,87 @@
+<!-- 文件上传模态框 -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadModalLabel">
+          <i class="bi bi-upload me-2"></i>上传文件
+          <small class="text-muted ms-2" id="currentUploadPath"></small>
+        </h5>
+        <div class="upload-progress-summary mt-2" id="uploadProgressSummary" style="display: none;">
+          <small class="text-muted">
+            已完成 <span id="completedCount">0</span> / <span id="totalCount">0</span> 个文件
+            (<span id="uploadedSize">0</span> / <span id="totalSize">0</span>)
+          </small>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-sm btn-outline-secondary" id="minimizeUploadBtn" title="最小化">
+            <i class="bi bi-dash-lg"></i>
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal" aria-label="关闭">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <!-- Dropzone上传区域 -->
+        <form class="dropzone dz-clickable" id="uploadDropzone">
+          <div class="dz-message">
+            <i class="bi bi-cloud-upload display-4"></i>
+            <h4>拖放文件到此处或点击选择</h4>
+            <span class="text-muted">支持多文件上传，选择后点击开始上传</span>
+          </div>
+        </form>
+
+        <!-- 上传控制按钮 -->
+        <div class="upload-controls mt-3 d-flex justify-content-between align-items-center">
+          <button class="btn btn-primary" id="startUploadBtn" disabled>
+            <i class="bi bi-play-fill"></i> 开始上传
+          </button>
+          <div class="btn-group">
+            <button class="btn btn-outline-info" id="clearCompletedBtn" style="display: none;">
+              <i class="bi bi-check-square"></i> 清空已完成
+            </button>
+            <button class="btn btn-outline-danger" id="clearQueueBtn" style="display: none;">
+              <i class="bi bi-trash"></i> 清空
+            </button>
+          </div>
+        </div>
+
+        <!-- 上传队列 -->
+        <div class="upload-queue mt-3">
+          <div class="upload-queue-list" id="uploadQueueList"></div>
+          <div class="mt-2 text-muted small" id="uploadStatusInfo">选择文件后点击开始上传...</div>
+          <div class="alert alert-info mt-2 small">
+            <i class="bi bi-info-circle"></i> 大文件上传可能需要较长时间，请勿关闭窗口。上传成功后会自动刷新文件列表。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 最小化后的上传进度指示器 -->
+<div class="upload-minimized" id="uploadMinimized" style="display: none;">
+  <div class="upload-minimized-progress">
+    <div class="progress" style="height: 3px;">
+      <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center p-2">
+      <div class="upload-status">
+        <i class="bi bi-upload"></i>
+        <span class="upload-progress-text">0%</span>
+        <small class="text-muted ms-2">正在上传...</small>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-sm btn-link text-primary" id="maximizeUploadBtn">
+          <i class="bi bi-arrows-angle-expand"></i>
+        </button>
+        <button class="btn btn-sm btn-link text-danger" id="closeMinimizedUploadBtn">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="css/upload.css">

@@ -1,0 +1,162 @@
+/* nascore - 面板页面样式 */
+
+/* 主内容区域布局 */
+.main-content {
+  display: block;
+  min-height: calc(100vh - 3.5rem);
+  margin-top: 3.5rem;
+}
+
+/* 内容区域布局 */
+.content-wrapper {
+  margin-left: 15rem;
+  width: calc(100% - 240px);
+  padding: 0;
+  transition: all 0.3s;
+  background-color: var(--bg-secondary);
+  min-height: 100%;
+}
+
+/* 视图模式切换样式 - 详细样式已移至 grid_view.css */
+
+/* 文件列表样式 */
+/* 文件列表基础样式 */
+.file-list {
+  margin-top: 3.5rem; /* 与面包屑导航的高度一致 */
+  width: 100%;
+  background-color: var(--bg-primary);
+  min-height: calc(100vh - 8rem);
+}
+
+/* 详细列表视图样式 */
+.detailed-list .file-item {
+  padding: 0.75rem 1rem;
+  transition: all 0.2s;
+  cursor: pointer;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.detailed-list .file-item:hover {
+  background-color: var(--bg-hover);
+}
+
+.detailed-list .file-icon {
+  font-size: 1.5rem;
+  width: 2rem;
+  text-align: center;
+}
+
+.detailed-list .select-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.detailed-list .form-check-input {
+  margin: 0;
+}
+
+.file-list-header {
+  padding: 0.75rem 1rem;
+  background-color: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.sort-header {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sort-header:hover {
+  color: var(--btn-primary-bg);
+}
+
+/* 文件项通用样式 */
+
+/* 确保文件列表占满剩余空间 */
+.file-list {
+  margin-top: 4.5rem;
+
+  min-height: calc(100vh - 8rem); /* 减去头部和面包屑的高度 */
+}
+
+.file-item {
+  position: relative;
+}
+
+.file-item:hover {
+  background-color: var(--bg-hover);
+}
+
+.file-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 文件详情模态框路径输入框样式 */
+.fileDetailModal-filepath-input {
+  max-width: 25rem; /* 调整最大宽度，使其在模态框中更合适 */
+  margin: 1rem auto; /* 居中显示，并提供上下间距 */
+  background-color: var(--bg-secondary); /* 使用一个与模态框背景色一致或更深的颜色 */
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.3rem;
+  text-align: center; /* 文本居中 */
+  overflow: hidden; /* 隐藏超出部分 */
+  white-space: nowrap; /* 不换行 */
+  text-overflow: ellipsis; /* 显示省略号 */
+  cursor: text; /* 显示为文本光标 */
+  box-shadow: none; /* 移除Bootstrap默认input的box-shadow */
+}
+
+.fileDetailModal-filepath-input:focus {
+  border-color: var(--btn-primary-bg); /* 聚焦时边框颜色 */
+  box-shadow: 0 0 0 0.25rem var(--btn-primary-shadow); /* Bootstrap默认聚焦效果的半透明蓝色 */
+  outline: 0;
+}
+
+.select-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 响应式设计 - 网格视图适配已移至 grid_view.css */
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+  .content-wrapper {
+    margin-left: 4rem;
+    width: calc(100% - 4rem);
+  }
+  calc(100% - 240px) .content-wrapper.sidebar-open {
+    margin-left: 15rem;
+    width: calc(100% - 240px);
+  }
+}
+
+/* 适配暗色模式 */
+:root[data-theme='dark'] .file-item {
+  border-color: var(--border-color);
+}
+
+:root[data-theme='dark'] .breadcrumb-container,
+:root[data-theme='dark'] .file-list-header {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+}
+
+:root[data-theme='dark'] .sidebar {
+  background-color: var(--bg-sidebar);
+}
+
+:root[data-theme='dark'] .fileDetailModal-filepath-input {
+  background-color: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}

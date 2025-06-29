@@ -1,0 +1,54 @@
+/* 右键菜单样式 */
+.context-menu {
+  position: fixed;
+  z-index: 1100;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0;
+  min-width: 12rem;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.98);
+  transform-origin: top left;
+  transition:
+    opacity 0.2s,
+    transform 0.2s,
+    visibility 0s linear 0.2s;
+}
+
+.context-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition:
+    opacity 0.2s,
+    transform 0.2s,
+    visibility 0s;
+}
+
+.context-menu-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: var(--text-primary);
+  transition: all 0.2s;
+}
+
+.context-menu-item:hover {
+  background-color: var(--bg-hover);
+}
+
+.context-menu-item i {
+  width: 1.5rem;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+.context-menu-divider {
+  height: 1px;
+  margin: 0.5rem 0;
+  background-color: var(--border-color);
+}

@@ -1,0 +1,58 @@
+<div id="ThirdPartyExtCaddy2" style="padding-top: 4rem;"></div>
+<div class="container-fluid py-3">
+
+  <div class="row mt-4">
+    <div class="settingContainer">
+      <h3 class="mb-4">Caddy2 服务配置</h3>
+
+      <div class="mb-3">
+        <label for="ThirdPartyExtCaddy2DownLoadlink" class="form-label">Caddy2 github下载地址 <button type="button"
+            class="btn  btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#githubMirrorModal">
+            设置 GitHub Mirror
+          </button></label>
+        <input type="text" class="form-control" id="ThirdPartyExtCaddy2DownLoadlink"
+          data-bind="ThirdPartyExt.Caddy2.DownLoadlink">
+      </div>
+      <div> <small class="form-text text-muted">like:
+          https://github.com/caddyserver/caddy/releases/download/v{ver}/caddy_{ver}_{os}_{arch}.tar.gz</small>
+      </div>
+      <div class="mb-3">
+        <label for="ThirdPartyExtCaddy2Version" class="form-label">Version</label>
+        <input type="text" class="form-control" id="ThirdPartyExtCaddy2Version"
+          data-bind="ThirdPartyExt.Caddy2.Version">
+      </div>
+
+      <div class="mb-3">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="Caddy2AutoStartEnable"
+            data-bind="ThirdPartyExt.Caddy2.AutoStartEnable">
+          <label class="form-check-label" for="Caddy2AutoStartEnable">启用 Caddy2 跟随启动 </label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="Caddy2BinPath" class="form-label">Caddy2 路径 <button class="btn btn-secondary"
+            onclick="downloadCaddy2()">下载Caddy2到指定路径</button>
+        </label>
+        <input type="text" class="form-control" id="Caddy2BinPath" data-bind="ThirdPartyExt.Caddy2.BinPath">
+      </div>
+      <div class="mb-3">
+        <label for="ThirdPartyExtCaddy2ConfigPath" class="form-label">配置文件
+        </label>
+        <input type="text" class="form-control" id="ThirdPartyExtCaddy2ConfigPath"
+          data-bind="ThirdPartyExt.Caddy2.ConfigPath">
+
+      </div>
+      <div class="mb-3">
+
+        <button class="btn btn-primary" onclick="EditCaddy()">编辑网站配置</button>
+      </div>
+      <div>
+        <small class="form-text text-muted">Caddy2 可以下载到和nascore 同目录下，并尝试解压，你也可以用其他方式自行下载安装。<br>
+          如果自行安装的caddy2 记得修改路径，或者自行安装成服务模式。<br>
+          编辑功能 目前仅仅支持Caddyfile格式的配置文件。
+        </small>
+      </div>
+
+    </div>
+  </div>
+</div>

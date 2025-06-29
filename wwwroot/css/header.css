@@ -1,0 +1,120 @@
+/* nascore - 页头样式 */
+
+/* Logo样式 */
+
+.navbar-brand {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.header_logo {
+  width: 3.5rem;
+}
+.header_logo_text {
+  color: var(--text-nav);
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-left: 0.5rem;
+  text-decoration: none;
+}
+
+/* 导航栏基础样式 */
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  background-color: var(--bg-nav) !important;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-speed) ease;
+}
+
+/* 用户菜单按钮样式 */
+.navbar .btn-icon {
+  border-radius: 50%;
+  width: 2.375rem;
+  height: 2.375rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+  background: transparent;
+  transition: all var(--transition-speed) ease;
+}
+
+.navbar .btn-icon:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.navbar .btn-icon i {
+  font-size: 1.25rem;
+}
+
+/* 用户菜单下拉框样式 */
+.navbar .dropdown-menu {
+  margin-top: 0.5rem;
+  min-width: 12rem;
+}
+
+.navbar .dropdown-item {
+  padding: 0.5rem 1rem;
+  color: var(--text-primary);
+}
+
+.navbar .dropdown-item i {
+  width: 1.25rem;
+  text-align: center;
+  margin-right: 0.5rem;
+}
+
+.navbar .dropdown-item:hover {
+  background-color: var(--bg-hover);
+}
+
+.navbar .dropdown-menu li span#username {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  height: 1.5rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.navbar .dropdown-divider {
+  margin: 0.5rem 0;
+  border-top-color: var(--border-color);
+}
+
+/* 响应式适配 */
+@media (max-width: 992px) {
+  .navbar {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* 暗色主题适配 */
+:root[data-theme='dark'] .navbar {
+  /*background-color: var(--bg-nav);*/
+  background-color: #111;
+}
+
+:root[data-theme='dark'] .navbar .dropdown-menu {
+  background-color: var(--bg-dropdown);
+  border-color: var(--border-color);
+}
+
+:root[data-theme='dark'] .navbar .dropdown-item {
+  color: var(--text-primary);
+}
+
+:root[data-theme='dark'] .navbar .dropdown-item:hover {
+  background-color: var(--bg-dropdown-hover);
+}

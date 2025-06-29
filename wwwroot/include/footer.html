@@ -1,0 +1,23 @@
+<div id="LogPanel" class="card shadow"
+  style="display: none; position: fixed; top: 10%; right: 10%; width: 50%; max-width: 600px; z-index: 1060; border: 1px solid rgba(0,0,0,.2); border-radius: 0.3rem;">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="card-title mb-0" id="LogPanelTitle">日志</h5>
+    <button type="button" class="btn-close" aria-label="Close"
+      onclick="document.getElementById('LogPanel').style.display='none';"></button>
+  </div>
+  <div class="card-body">
+    <pre id="LogPanelContent" class=" p-2 rounded"
+      style="white-space: pre-wrap; word-break: break-all; max-height: 60vh; overflow-y: auto; font-size: 0.8rem;">
+    </pre>
+  </div>
+</div>
+
+
+<link rel="stylesheet" href="css/footer.css">
+<!-- 页面底部 -->
+<footer class="footer">
+  <p>nascore.eu.org <small>&copy; 2025 ver1.1</small>
+  </p>
+</footer>
+{{.WebUIPubLicCdn.footer}}
+<script src="js/public.js"></script>

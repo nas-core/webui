@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>文件预览</title>
+  {{.WebUIPubLicCdn.header}}
+  <link rel="stylesheet" href="css/file_preview.css">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: #f8f9fa;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preview-header {
+      background-color: #343a40;
+      color: white;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .preview-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .preview-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      overflow: auto;
+    }
+
+    .artplayer-app {
+      width: 100%;
+      height: 100%;
+    }
+
+    .file-preview-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .file-preview-audio {
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .preview-loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .preview-loading::after {
+      content: '';
+      width: 3rem;
+      height: 3rem;
+      border: 0.25rem solid #dee2e6;
+      border-radius: 50%;
+      border-top-color: #007bff;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="preview-header">
+    <h5 class="preview-title" id="previewTitle">文件预览</h5>
+    <button class="btn btn-sm btn-outline-light" id="downloadBtn">
+      <i class="bi bi-download me-1"></i>下载
+    </button>
+  </div>
+
+  <div class="preview-container" id="previewContainer">
+    <div class="preview-loading"></div>
+  </div>
+  {{.WebUIPubLicCdn.footer}}
+  {{.WebUIPubLicCdn.Artplayer}}
+
+  <script>
+    // 支持预览的文件类型
+    const previewableImageTypes = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'];
+    const previewableVideoTypes = ['.mp4', '.webm', '.ogg', '.mov', '.mkv', '.avi', '.m3u8'];
+    const previewableAudioTypes = ['.mp3', '.wav', '.ogg', '.aac', '.flac'];
+
+    // 全局播放器实例
+    let artPlayerInstance = null;
+
+    // 初始化
+    document.addEventListener('DOMContentLoaded', function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const filePath = urlParams.get('path');
+      const fileName = urlParams.get('name');
+      const token = urlParams.get('token');
+
+      // 设置页面标题
+      document.title = fileName ? `预览: ${fileName}` : '文件预览';
+
+      // 设置预览标题
+      const previewTitle = document.getElementById('previewTitle');
+      if (previewTitle && fileName) {
+        previewTitle.textContent = fileName;
+      }
+
+      // 初始化下载按钮
+      const downloadBtn = document.getElementById('downloadBtn');
+      if (downloadBtn && filePath && token) {
+        downloadBtn.addEventListener('click', function () {
+          window.location.href = `/@api/file/download?path=${encodeURIComponent(filePath)}&token=${token}`;
+        });
+      }
+
+      // 加载预览
+      if (filePath && fileName && token) {
+        loadPreview(filePath, fileName, token);
+      } else {
+        showError('缺少必要的参数');
+      }
+    });
+
+    // 加载预览
+    function loadPreview(filePath, fileName, token) {
+      const container = document.getElementById('previewContainer');
+      const extension = fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
+
+      if (previewableImageTypes.includes(extension)) {
+        loadImagePreview(filePath, fileName, token, container);
+      } else if (previewableVideoTypes.includes(extension)) {
+        loadVideoPreview(filePath, fileName, extension, token, container);
+      } else if (previewableAudioTypes.includes(extension)) {
+        loadAudioPreview(filePath, fileName, token, container);
+      } else {
+        showError('不支持预览此类型的文件');
+      }
+    }
+
+    // 加载图片预览
+    function loadImagePreview(filePath, fileName, token, container) {
+      try {
+        // 使用download接口直接获取图片URL
+        const imageUrl = `/@api/file/download?path=${encodeURIComponent(filePath)}&token=${token}`;
+
+        // 创建图片元素
+        const img = document.createElement('img');
+        img.className = 'file-preview-image';
+        img.alt = fileName;
+
+        // 加载完成后移除加载状态
+        img.onload = function () {
+          container.innerHTML = '';
+          container.appendChild(img);
+        };
+
+        // 加载错误处理
+        img.onerror = function () {
+          showError('图片加载失败');
+        };
+
+        // 设置图片源
+        img.src = imageUrl;
+      } catch (err) {
+        showError(`加载图片失败: ${err.message || '未知错误'}`);
+      }
+    }
+
+    // 加载视频预览
+    function loadVideoPreview(filePath, fileName, extension, token, container) {
+      // 清除容器
+      container.innerHTML = '';
+
+      // 创建ArtPlayer容器
+      const playerContainer = document.createElement('div');
+      playerContainer.className = 'artplayer-app';
+      container.appendChild(playerContainer);
+
+      // 如果有旧的播放器实例，销毁它
+      if (artPlayerInstance) {
+        artPlayerInstance.destroy();
+        artPlayerInstance = null;
+      }
+
+      // 获取视频URL
+      const videoUrl = `/@api/file/download?path=${encodeURIComponent(filePath)}&token=${token}`;
+
+      // 检查是否为HLS格式
+      const isHLS = extension === '.m3u8';
+
+      // 创建ArtPlayer实例
+      artPlayerInstance = new Artplayer({
+        container: playerContainer,
+        url: videoUrl,
+        title: fileName,
+        volume: 0.5,
+        isLive: isHLS,
+        muted: false,
+        autoplay: false,
+        pip: true,
+        autoSize: true,
+        autoMini: false,
+        screenshot: true,
+        setting: true,
+        loop: false,
+        flip: true,
+        playbackRate: true,
+        aspectRatio: true,
+        fullscreen: true,
+        fullscreenWeb: true,
+        subtitleOffset: false,
+        miniProgressBar: true,
+        mutex: true,
+        backdrop: true,
+        playsInline: true,
+        autoPlayback: false,
+        theme: '#23ade5',
+        customType: {
+          m3u8: function (video, url) {
+            if (Hls.isSupported()) {
+              const hls = new Hls();
+              hls.loadSource(url);
+              hls.attachMedia(video);
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+              video.src = url;
+            } else {
+              showError('您的浏览器不支持播放HLS视频');
+            }
+          },
+        },
+      });
+    }
+
+    // 加载音频预览
+    function loadAudioPreview(filePath, fileName, token, container) {
+      // 创建音频元素
+      const audio = document.createElement('audio');
+      audio.className = 'file-preview-audio';
+      audio.controls = true;
+      audio.preload = 'metadata';
+
+      // 获取音频URL
+      const audioUrl = `/@api/file/download?path=${encodeURIComponent(filePath)}&token=${token}`;
+
+      // 音频源
+      const source = document.createElement('source');
+      source.src = audioUrl;
+
+      // 添加到音频元素
+      audio.appendChild(source);
+
+      // 加载完成后移除加载状态
+      audio.oncanplay = function () {
+        container.innerHTML = '';
+        container.appendChild(audio);
+      };
+
+      // 加载错误处理
+      audio.onerror = function () {
+        showError('音频加载失败');
+      };
+
+      // 添加到容器
+      container.innerHTML = '';
+      container.appendChild(audio);
+    }
+
+    // 显示错误消息
+    function showError(message) {
+      const container = document.getElementById('previewContainer');
+      if (container) {
+        container.innerHTML = `<div class="alert alert-danger">${message || '加载预览失败'}</div>`;
+      }
+    }
+
+    // 窗口关闭时清理资源
+    window.addEventListener('beforeunload', function () {
+      if (artPlayerInstance) {
+        artPlayerInstance.destroy();
+        artPlayerInstance = null;
+      }
+    });
+  </script>
+</body>
+
+</html>
