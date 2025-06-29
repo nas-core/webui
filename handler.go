@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/nas-core/nascore/pkgs/isDevMode"
+	"github.com/nas-core/webui/webuiLib"
 
 	"github.com/nas-core/nascore/pkgs/system_config"
 
@@ -25,8 +26,8 @@ func Webui_handler(nsCfg *system_config.SysCfg, logger *zap.SugaredLogger, qpsCo
 		isMinifyEnabled = true
 
 	}
-	if isMinifyEnabled && minifierInstance == nil {
-		initMinifier()
+	if isMinifyEnabled && webuiLib.MinifierInstance == nil {
+		webuiLib.InitMinifier()
 	}
 	return func(w http.ResponseWriter, r *http.Request) {
 		if !nsCfg.Server.WebuiAndApiEnable {
@@ -54,13 +55,13 @@ func Webui_handler(nsCfg *system_config.SysCfg, logger *zap.SugaredLogger, qpsCo
 				return
 			}
 			w.Header().Set("Content-Type", "text/html")
-			parsedContent = replaceTemplatePlaceholders(parsedContent, nsCfg.WebUIPubLicCdn)
+			parsedContent = webuiLib.ReplaceTemplatePlaceholders(parsedContent, nsCfg.WebUIPubLicCdn)
 			if !isMinifyEnabled {
 				w.Write([]byte(parsedContent))
 			} else {
 				// logger.Info("压缩 shtml")
 				result := &bytes.Buffer{}
-				err := minifierInstance.Minify("text/html", result, bytes.NewReader([]byte(parsedContent)))
+				err := webuiLib.MinifierInstance.Minify("text/html", result, bytes.NewReader([]byte(parsedContent)))
 				if err != nil {
 					logger.Errorln("Error minifying HTML content: ", err)
 					w.Write([]byte(parsedContent))
@@ -83,7 +84,7 @@ func Webui_handler(nsCfg *system_config.SysCfg, logger *zap.SugaredLogger, qpsCo
 				return
 			}
 			if isMinifyEnabled && isMinifiable(fileExt) { // 仅对可压缩文件类型执行压缩
-				content, err = Exe_minify([]byte(replaceTemplatePlaceholders(string(content), nsCfg.WebUIPubLicCdn)), filePath, fileExt)
+				content, err = webuiLib.Exe_minify([]byte(webuiLib.ReplaceTemplatePlaceholders(string(content), nsCfg.WebUIPubLicCdn)), filePath, fileExt)
 				if err != nil {
 					logger.Errorln("Error minifying file:", err)
 					http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -119,7 +120,7 @@ func isMinifiable(fileExt string) bool {
 func handleFileContent(content []byte, fileExt string, nsCfg *system_config.SysCfg, w http.ResponseWriter) {
 	// 仅对文本类型文件替换占位符
 	if isTextFile(fileExt) {
-		content = []byte(replaceTemplatePlaceholders(string(content), nsCfg.WebUIPubLicCdn))
+		content = []byte(webuiLib.ReplaceTemplatePlaceholders(string(content), nsCfg.WebUIPubLicCdn))
 	}
 
 	// 设置 Content-Type

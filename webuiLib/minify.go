@@ -1,4 +1,4 @@
-package webui
+package webuiLib
 
 import (
 	"bytes"
@@ -16,11 +16,11 @@ import (
 
 var MinifyEnabled = false
 
-var minifierInstance *minify.M
+var MinifierInstance *minify.M
 
 // 初始化minifier实例
-func initMinifier() {
-	if minifierInstance == nil {
+func InitMinifier() {
+	if MinifierInstance == nil {
 		m := minify.New()
 		// 注册各种文件类型的压缩器
 		m.AddFunc("text/html", html.Minify)
@@ -29,13 +29,13 @@ func initMinifier() {
 		m.AddFuncRegexp(regexp.MustCompile("[/+]json$"), json.Minify)
 		m.AddFuncRegexp(regexp.MustCompile("[/+]xml$"), xml.Minify)
 		m.AddFunc("image/svg+xml", svg.Minify)
-		minifierInstance = m
+		MinifierInstance = m
 	}
 }
 
 func Exe_minify(content []byte, path string, ext string) ([]byte, error) {
-	if minifierInstance == nil {
-		initMinifier() // 确保使用之前初始化了
+	if MinifierInstance == nil {
+		InitMinifier() // 确保使用之前初始化了
 	}
 	var mediaType string
 	switch strings.ToLower(ext) { // 根据小写扩展名判断媒体类型
@@ -53,7 +53,7 @@ func Exe_minify(content []byte, path string, ext string) ([]byte, error) {
 		mediaType = "application/xml"
 	}
 	result := &bytes.Buffer{}
-	err := minifierInstance.Minify(mediaType, result, bytes.NewReader(content))
+	err := MinifierInstance.Minify(mediaType, result, bytes.NewReader(content))
 	if err != nil {
 		return content, err // 如果压缩失败，返回原始内容
 	}
