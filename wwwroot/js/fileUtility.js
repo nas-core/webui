@@ -14,7 +14,7 @@
   async function getFileContent(filePath, asText = true) {
     try {
       // 从后端读取文件内容
-      const res = await window.API.request(`/@api/file/read?path=${encodeURIComponent(filePath)}`, {}, { needToken: true })
+      const res = await window.API.request(`{{.ServerUrl}}/@api/file/read?path=${encodeURIComponent(filePath)}`, {}, { needToken: true })
 
       if (res.data && (typeof res.data.content === 'string' || res.data.content instanceof ArrayBuffer)) {
         return {
@@ -51,7 +51,7 @@
       console.error('未找到有效的访问令牌')
       return ''
     }
-    return `/@api/file/download?path=${encodeURIComponent(filePath)}&token=${accessToken}`
+    return `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(filePath)}&token=${accessToken}`
   }
 
   /**
@@ -65,7 +65,7 @@
       console.error('未找到有效的访问令牌')
       return ''
     }
-    return `/@api/file/read?path=${encodeURIComponent(filePath)}&token=${accessToken}`
+    return `{{.ServerUrl}}/@api/file/read?path=${encodeURIComponent(filePath)}&token=${accessToken}`
   }
 
   /**
@@ -86,7 +86,7 @@
   async function saveFileContent(filePath, content) {
     try {
       const res = await window.API.request(
-        `/@api/file/saveContent`,
+        `{{.ServerUrl}}/@api/file/saveContent`,
         {
           path: filePath,
           content: content,
@@ -125,7 +125,7 @@
       console.error('未找到有效的访问令牌')
       return ''
     }
-    return `/@api/file/download?path=${encodeURIComponent(filePath)}&token=${accessToken}`
+    return `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(filePath)}&token=${accessToken}`
   }
 
   // 将功能暴露给全局

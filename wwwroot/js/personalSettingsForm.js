@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
       submitButton.textContent = '更新中...'
 
       console.log('开始发送密码修改请求')
-      fetch('/@api/user/changePassword', {
+      fetch('{{.ServerUrl}}/@api/user/changePassword', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

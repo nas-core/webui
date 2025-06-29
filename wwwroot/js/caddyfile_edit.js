@@ -56,7 +56,7 @@ async function reloadCaddy() {
   try {
     console.log(`尝试重载 Caddy: binPath=${binPath}, configPath=${configPath}`)
     const res = await window.API.request(
-      `/@api/admin/SpecialOPT?opt=caddyreload&binPath=${encodeURIComponent(binPath)}&configPath=${encodeURIComponent(configPath)}`,
+      `{{.ServerUrl}}/@api/admin/SpecialOPT?opt=caddyreload&binPath=${encodeURIComponent(binPath)}&configPath=${encodeURIComponent(configPath)}`,
       {},
       { needToken: true, method: 'GET' } // 后端 Handers_admin_caddyreload 是GET请求
     )
@@ -108,7 +108,7 @@ async function reloadCaddy() {
 async function getServerFileContent(filePath, asText = true) {
   try {
     // 从后端读取文件内容
-    const res = await window.API.request(`/@api/admin/getServerFile?path=${encodeURIComponent(filePath)}`, {}, { needToken: true })
+    const res = await window.API.request(`{{.ServerUrl}}/@api/admin/getServerFile?path=${encodeURIComponent(filePath)}`, {}, { needToken: true })
 
     if (res.code === 1 && res.data && (typeof res.data.content === 'string' || res.data.content instanceof ArrayBuffer)) {
       return {
@@ -150,7 +150,7 @@ async function getServerFileContent(filePath, asText = true) {
 async function saveServerFileContent(filePath, content) {
   try {
     const res = await window.API.request(
-      `/@api/admin/saveServerFile?path=${encodeURIComponent(filePath)}`,
+      `{{.ServerUrl}}/@api/admin/saveServerFile?path=${encodeURIComponent(filePath)}`,
       {
         content: content,
       },

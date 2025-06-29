@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // 使用用户名作为key解密密码
       const password = PasswordCrypto.decrypt(encryptedPassword, username)
 
-      const response = await API.request('/@api/user/login', {
+      const response = await API.request('{{.ServerUrl}}/@api/user/login', {
         username,
         password,
       })
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const response = await API.request('/@api/user/login', {
+      const response = await API.request('{{.ServerUrl}}/@api/user/login', {
         username,
         password,
       })

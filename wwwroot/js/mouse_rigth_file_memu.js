@@ -417,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
           const accessToken = window.API.TokenManager.getAccessToken() // 获取 access token
           if (accessToken) {
-            window.location.href = `/@api/file/download?path=${encodeURIComponent(path)}&token=${accessToken}` // 附加 token
+            window.location.href = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(path)}&token=${accessToken}` // 附加 token
             window.showNotification(`正在下载 "${targetItem.querySelector('.ms-2')?.textContent || ''}"`, 'info')
           } else {
             window.showNotification('未找到认证信息，无法下载。请重新登录。', 'error')

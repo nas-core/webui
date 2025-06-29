@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // 获取全局设置
   function getGlobalSettings() {
     const token = localStorage.getItem('jwt_access_token')
-    fetch('/@api/admin/globalSettings', {
+    fetch('{{.ServerUrl}}/@api/admin/globalSettings', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const data = window.globalSettingsData // 直接使用全局数据
 
     const token = localStorage.getItem('jwt_access_token')
-    fetch('/@api/admin/globalSettings', {
+    fetch('{{.ServerUrl}}/@api/admin/globalSettings', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

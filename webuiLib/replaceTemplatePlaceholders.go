@@ -7,7 +7,8 @@ import (
 )
 
 // replaceTemplatePlaceholders 替换模板中的占位符
-func ReplaceTemplatePlaceholders(content string, webuiCdnConfig system_config.WebUIStru) string {
+func ReplaceTemplatePlaceholders(content string, webuiCdnConfig system_config.WebUIStru, ServerUrl *string) string {
+	content = strings.ReplaceAll(content, "{{.ServerUrl}}", *ServerUrl)
 	content = strings.ReplaceAll(content, "{{.WebUIPubLicCdn.header}}", webuiCdnConfig.Header)
 	content = strings.ReplaceAll(content, "{{.WebUIPubLicCdn.footer}}", webuiCdnConfig.Footer)
 	content = strings.ReplaceAll(content, "{{.WebUIPubLicCdn.Dropzone}}", webuiCdnConfig.Dropzone)

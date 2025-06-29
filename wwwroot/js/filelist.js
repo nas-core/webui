@@ -56,7 +56,7 @@ async function loadFileList(path, shouldClear = true) {
   }
 
   try {
-    const res = await window.API.request(`/@api/file/list?path=${encodeURIComponent(path)}`, {}, { needToken: true })
+    const res = await window.API.request(`{{.ServerUrl}}/@api/file/list?path=${encodeURIComponent(path)}`, {}, { needToken: true })
     if (!res.data || !Array.isArray(res.data.items)) throw new Error('数据格式错误')
 
     // 检查用户设置，是否启用了仅使用缩略图
@@ -173,7 +173,7 @@ function renderFileList(items, currentPath, shouldClear = true) {
           ) {
             // 缩略图存在，显示缩略图
             const accessToken = window.API.TokenManager.getAccessToken()
-            const thumbnailUrl = `/@api/file/download?path=${encodeURIComponent(thumbnailPath)}&token=${accessToken}`
+            const thumbnailUrl = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(thumbnailPath)}&token=${accessToken}`
             iconHtml = `<div class="file-preview-container"><img src="${thumbnailUrl}" class="file-image-preview" alt="${escapeHtml(item.name)}" /></div>`
           } else {
             // 缩略图不存在或未知，使用默认图标
@@ -185,7 +185,7 @@ function renderFileList(items, currentPath, shouldClear = true) {
       if (shouldShowPreview) {
         // 使用原始图片预览
         const accessToken = window.API.TokenManager.getAccessToken() // 获取 access token
-        const imageUrl = `/@api/file/download?path=${encodeURIComponent(item.path)}&token=${accessToken}`
+        const imageUrl = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(item.path)}&token=${accessToken}`
         iconHtml = `<div class="file-preview-container"><img src="${imageUrl}" class="file-image-preview" alt="${escapeHtml(item.name)}" /></div>`
       } else {
         // 确保 window.getFileIcon 在此可用
@@ -410,7 +410,7 @@ async function loadThumbnailDirectory(currentPath, items) {
 
     try {
       // 请求缩略图目录
-      const res = await window.API.request(`/@api/file/list?path=${encodeURIComponent(thumbnailDirPath)}`, {}, { needToken: true })
+      const res = await window.API.request(`{{.ServerUrl}}/@api/file/list?path=${encodeURIComponent(thumbnailDirPath)}`, {}, { needToken: true })
 
       if (res.data && Array.isArray(res.data.items)) {
         // 缩略图目录存在
@@ -512,7 +512,7 @@ function addItemToList(item) {
         ) {
           // 缩略图存在，显示缩略图
           const accessToken = window.API.TokenManager.getAccessToken()
-          const thumbnailUrl = `/@api/file/download?path=${encodeURIComponent(thumbnailPath)}&token=${accessToken}`
+          const thumbnailUrl = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(thumbnailPath)}&token=${accessToken}`
           iconHtml = `<div class="file-preview-container"><img src="${thumbnailUrl}" class="file-image-preview" alt="${escapeHtml(item.name)}" /></div>`
         } else {
           // 缩略图不存在或未知，使用默认图标
@@ -524,7 +524,7 @@ function addItemToList(item) {
     if (shouldShowPreview) {
       // 使用原始图片预览
       const accessToken = window.API.TokenManager.getAccessToken() // 获取 access token
-      const imageUrl = `/@api/file/download?path=${encodeURIComponent(item.path)}&token=${accessToken}`
+      const imageUrl = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(item.path)}&token=${accessToken}`
       iconHtml = `<div class="file-preview-container"><img src="${imageUrl}" class="file-image-preview" alt="${escapeHtml(item.name)}" /></div>`
     } else {
       iconHtml = `<i class="bi ${window.getFileIcon ? window.getFileIcon(item.name) : 'bi-file-earmark-fill text-secondary'} file-icon text-primary"></i>`

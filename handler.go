@@ -15,6 +15,8 @@ import (
 	"go.uber.org/zap"
 )
 
+var ServerUrl = ""
+
 func Webui_handler(nsCfg *system_config.SysCfg, logger *zap.SugaredLogger, qpsCounter *uint64) http.HandlerFunc {
 	isUseEmbeddedFS := false
 	isMinifyEnabled := false
@@ -55,7 +57,7 @@ func Webui_handler(nsCfg *system_config.SysCfg, logger *zap.SugaredLogger, qpsCo
 				return
 			}
 			w.Header().Set("Content-Type", "text/html")
-			parsedContent = webuiLib.ReplaceTemplatePlaceholders(parsedContent, nsCfg.WebUIPubLicCdn)
+			parsedContent = webuiLib.ReplaceTemplatePlaceholders(parsedContent, nsCfg.WebUIPubLicCdn, &ServerUrl)
 			if !isMinifyEnabled {
 				w.Write([]byte(parsedContent))
 			} else {
@@ -84,7 +86,7 @@ func Webui_handler(nsCfg *system_config.SysCfg, logger *zap.SugaredLogger, qpsCo
 				return
 			}
 			if isMinifyEnabled && isMinifiable(fileExt) { // 仅对可压缩文件类型执行压缩
-				content, err = webuiLib.Exe_minify([]byte(webuiLib.ReplaceTemplatePlaceholders(string(content), nsCfg.WebUIPubLicCdn)), filePath, fileExt)
+				content, err = webuiLib.Exe_minify([]byte(webuiLib.ReplaceTemplatePlaceholders(string(content), nsCfg.WebUIPubLicCdn, &ServerUrl)), filePath, fileExt)
 				if err != nil {
 					logger.Errorln("Error minifying file:", err)
 					http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -120,7 +122,7 @@ func isMinifiable(fileExt string) bool {
 func handleFileContent(content []byte, fileExt string, nsCfg *system_config.SysCfg, w http.ResponseWriter) {
 	// 仅对文本类型文件替换占位符
 	if isTextFile(fileExt) {
-		content = []byte(webuiLib.ReplaceTemplatePlaceholders(string(content), nsCfg.WebUIPubLicCdn))
+		content = []byte(webuiLib.ReplaceTemplatePlaceholders(string(content), nsCfg.WebUIPubLicCdn, &ServerUrl))
 	}
 
 	// 设置 Content-Type

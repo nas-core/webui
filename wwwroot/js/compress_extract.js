@@ -21,7 +21,7 @@
       cleanTargetPath = cleanTargetPath.replace(/\/+/g, '/')
 
       return API.request(
-        `/@api/file/compress`,
+        `{{.ServerUrl}}/@api/file/compress`,
         {
           sourcePath: cleanSourcePath,
           targetPath: cleanTargetPath,
@@ -45,7 +45,7 @@
       cleanTargetPath = cleanTargetPath.replace(/\/+/g, '/')
 
       return API.request(
-        `/@api/file/extract`,
+        `{{.ServerUrl}}/@api/file/extract`,
         {
           sourcePath: cleanSourcePath,
           targetPath: cleanTargetPath,
@@ -84,7 +84,7 @@
       const cleanTargetPath = targetPath.startsWith('/') ? targetPath : '/' + targetPath
 
       return API.request(
-        `/@api/file/compress`,
+        `{{.ServerUrl}}/@api/file/compress`,
         {
           sourcePaths: cleanSourcePaths,
           targetPath: cleanTargetPath,
@@ -182,7 +182,7 @@
           // 下载压缩包
           const accessToken = window.API.TokenManager.getAccessToken()
           if (accessToken) {
-            window.location.href = `/@api/file/download?path=${encodeURIComponent(result.data.compressedPath)}&token=${accessToken}`
+            window.location.href = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(result.data.compressedPath)}&token=${accessToken}`
 
             // 如果设置了删除原文件
             if (deleteOriginal) {
@@ -247,7 +247,7 @@
           // 下载压缩包
           const accessToken = window.API.TokenManager.getAccessToken()
           if (accessToken) {
-            window.location.href = `/@api/file/download?path=${encodeURIComponent(result.data.compressedPath)}&token=${accessToken}`
+            window.location.href = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(result.data.compressedPath)}&token=${accessToken}`
 
             // 如果设置了删除原文件
             if (deleteOriginal) {

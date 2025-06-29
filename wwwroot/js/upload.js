@@ -71,7 +71,7 @@
       try {
         this.dropzone = new Dropzone(dropzoneElement, {
           url: (file) => {
-            return `/@api/file/upload?path=${encodeURIComponent(this.currentPath)}`
+            return `{{.ServerUrl}}/@api/file/upload?path=${encodeURIComponent(this.currentPath)}`
           },
           paramName: 'file',
           maxFilesize: 10240,
@@ -775,7 +775,7 @@
 
         const filePath = path.endsWith('/') ? path + file.name : path + '/' + file.name
         const accessToken = localStorage.getItem('jwt_access_token')
-        const response = await fetch(`/@api/file/list?path=${encodeURIComponent(filePath)}`, {
+        const response = await fetch(`{{.ServerUrl}}/@api/file/list?path=${encodeURIComponent(filePath)}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },

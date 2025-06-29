@@ -12,7 +12,7 @@ async function downloadCaddy2() {
 
   try {
     const response = await API.request(
-      `/@api/admin/get_ThirdParty_caddy2?DownLoadlink=${encodeURIComponent(DownLoadlink)}&Version=${encodeURIComponent(Version)}&BinPath=${encodeURIComponent(Caddy2BinPath)}&GitHubDownloadMirror=${encodeURIComponent(ThirdPartyExtGitHubDownloadMirror)}`,
+      `{{.ServerUrl}}/@api/admin/get_ThirdParty_caddy2?DownLoadlink=${encodeURIComponent(DownLoadlink)}&Version=${encodeURIComponent(Version)}&BinPath=${encodeURIComponent(Caddy2BinPath)}&GitHubDownloadMirror=${encodeURIComponent(ThirdPartyExtGitHubDownloadMirror)}`,
       {},
       { needToken: true }
     )

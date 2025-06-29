@@ -84,11 +84,11 @@ function showFileDetailModal(fileItem) {
         window.thumbnailDirectoryCache.files[thumbnailFileName]
       ) {
         // 缩略图存在于缓存中，直接使用
-        const thumbnailUrl = `/@api/file/download?path=${encodeURIComponent(thumbnailPath)}&token=${accessToken}`
+        const thumbnailUrl = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(thumbnailPath)}&token=${accessToken}`
         previewHtml = `<img src="${thumbnailUrl}" class="img-fluid mb-3" style="max-height:300px; border-radius:4px; box-shadow:0 2px 5px rgba(0,0,0,0.2);" alt="${escapeHtml(name)}">`
       } else {
         // 尝试检查缩略图是否存在
-        const thumbnailUrl = `/@api/file/download?path=${encodeURIComponent(thumbnailPath)}&token=${accessToken}`
+        const thumbnailUrl = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(thumbnailPath)}&token=${accessToken}`
 
         // 创建图像元素进行预加载，检查缩略图是否存在
         const thumbnailImg = new Image()
@@ -104,7 +104,7 @@ function showFileDetailModal(fileItem) {
     }
     // 如果不使用缩略图，且文件大小在限制范围内，则直接显示原图
     else if (fileSize <= maxImageSize) {
-      const imageUrl = `/@api/file/download?path=${encodeURIComponent(path)}&token=${accessToken}`
+      const imageUrl = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(path)}&token=${accessToken}`
       previewHtml = `<img src="${imageUrl}" class="img-fluid mb-3" style="max-height:300px; border-radius:4px; box-shadow:0 2px 5px rgba(0,0,0,0.2);" alt="${escapeHtml(name)}">`
     }
   }
@@ -233,7 +233,7 @@ function showFileDetailModal(fileItem) {
       if (!isDir) {
         const accessToken = window.API.TokenManager.getAccessToken() // 获取 access token
         if (accessToken) {
-          window.location.href = `/@api/file/download?path=${encodeURIComponent(path)}&token=${accessToken}` // 附加 token
+          window.location.href = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(path)}&token=${accessToken}` // 附加 token
           window.showNotification(`正在下载 "${name}"`, 'info')
           modal.hide()
         } else {
@@ -282,7 +282,7 @@ function showFileDetailModal(fileItem) {
             // 更新图片预览的src (需要更新为新路径)
             const accessToken = window.API.TokenManager.getAccessToken()
             if (accessToken) {
-              imgPreview.src = `/@api/file/download?path=${encodeURIComponent(newPath)}&token=${accessToken}`
+              imgPreview.src = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(newPath)}&token=${accessToken}`
             }
           } else {
             // 同时更新图标，以防文件类型改变

@@ -12,7 +12,7 @@ async function downloadDDNSGo() {
 
   try {
     const response = await API.request(
-      `/@api/admin/get_ThirdParty_ddnsgo?DownLoadlink=${encodeURIComponent(DownLoadlink)}&Version=${encodeURIComponent(Version)}&DdnsGOBinPath=${encodeURIComponent(DdnsGOBinPath)}&GitHubDownloadMirror=${encodeURIComponent(ThirdPartyExtGitHubDownloadMirror)}`,
+      `{{.ServerUrl}}/@api/admin/get_ThirdParty_ddnsgo?DownLoadlink=${encodeURIComponent(DownLoadlink)}&Version=${encodeURIComponent(Version)}&DdnsGOBinPath=${encodeURIComponent(DdnsGOBinPath)}&GitHubDownloadMirror=${encodeURIComponent(ThirdPartyExtGitHubDownloadMirror)}`,
       {},
       { needToken: true }
     )
@@ -37,7 +37,7 @@ async function resetDDNSGOPassword() {
   }
   try {
     const res = await window.API.request(
-      `/@api/admin/SpecialOPT?opt=ddnsgo_reset_admin&binPath=${encodeURIComponent(binPath)}&configPath=${encodeURIComponent(configPath)}`,
+      `{{.ServerUrl}}/@api/admin/SpecialOPT?opt=ddnsgo_reset_admin&binPath=${encodeURIComponent(binPath)}&configPath=${encodeURIComponent(configPath)}`,
       {},
       { needToken: true, method: 'GET' } // 后端 Handers_admin_caddyreload 是GET请求
     )

@@ -19,7 +19,7 @@
       cleanParentPath = cleanParentPath.replace(/\/+/g, '/')
 
       return API.request(
-        `/@api/file/createFolder`,
+        `{{.ServerUrl}}/@api/file/createFolder`,
         {
           path: cleanParentPath,
           name: folderName,
@@ -41,7 +41,7 @@
       cleanParentPath = cleanParentPath.replace(/\/+/g, '/')
 
       return API.request(
-        `/@api/file/createFile`,
+        `{{.ServerUrl}}/@api/file/createFile`,
         {
           path: cleanParentPath,
           name: fileName,
@@ -61,7 +61,7 @@
       // 规范化路径
       cleanItemPath = cleanItemPath.replace(/\/+/g, '/')
 
-      return API.request(`/@api/file/delete?path=${encodeURIComponent(cleanItemPath)}`, {}, { needToken: true })
+      return API.request(`{{.ServerUrl}}/@api/file/delete?path=${encodeURIComponent(cleanItemPath)}`, {}, { needToken: true })
     },
 
     /**
@@ -80,7 +80,7 @@
 
       // 发送请求
       const result = await API.request(
-        `/@api/file/move`,
+        `{{.ServerUrl}}/@api/file/move`,
         {
           sourcePath: cleanSourcePath,
           destinationPath: cleanDestinationPath,
@@ -113,7 +113,7 @@
       cleanDestinationPath = cleanDestinationPath.replace(/\/+/g, '/')
 
       return API.request(
-        `/@api/file/copy`,
+        `{{.ServerUrl}}/@api/file/copy`,
         {
           sourcePath: cleanSourcePath,
           destinationPath: cleanDestinationPath,
@@ -143,7 +143,7 @@
         const imgPreview = fileItem.querySelector('.file-image-preview')
         if (imgPreview) {
           // 更新图片预览的src
-          imgPreview.src = `/@api/file/download?path=${encodeURIComponent(newPath)}&token=${accessToken}`
+          imgPreview.src = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(newPath)}&token=${accessToken}`
 
           // 如果图片有alt属性，从新路径中提取文件名更新它
           const fileName = newPath.split('/').pop()

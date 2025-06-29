@@ -127,7 +127,7 @@
       const downloadBtn = document.getElementById('downloadBtn');
       if (downloadBtn && filePath && token) {
         downloadBtn.addEventListener('click', function () {
-          window.location.href = `/@api/file/download?path=${encodeURIComponent(filePath)}&token=${token}`;
+          window.location.href = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(filePath)}&token=${token}`;
         });
       }
 
@@ -159,7 +159,7 @@
     function loadImagePreview(filePath, fileName, token, container) {
       try {
         // 使用download接口直接获取图片URL
-        const imageUrl = `/@api/file/download?path=${encodeURIComponent(filePath)}&token=${token}`;
+        const imageUrl = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(filePath)}&token=${token}`;
 
         // 创建图片元素
         const img = document.createElement('img');
@@ -201,7 +201,7 @@
       }
 
       // 获取视频URL
-      const videoUrl = `/@api/file/download?path=${encodeURIComponent(filePath)}&token=${token}`;
+      const videoUrl = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(filePath)}&token=${token}`;
 
       // 检查是否为HLS格式
       const isHLS = extension === '.m3u8';
@@ -258,7 +258,7 @@
       audio.preload = 'metadata';
 
       // 获取音频URL
-      const audioUrl = `/@api/file/download?path=${encodeURIComponent(filePath)}&token=${token}`;
+      const audioUrl = `{{.ServerUrl}}/@api/file/download?path=${encodeURIComponent(filePath)}&token=${token}`;
 
       // 音频源
       const source = document.createElement('source');
