@@ -6,6 +6,8 @@ github.com/nas-core/nascore v0.0.0-20250629092914-9e9b7166618f h1:vHsN8OGuITM59S
 github.com/nas-core/nascore v0.0.0-20250629092914-9e9b7166618f/go.mod h1:ay0vtbu7Apgpx1KiQ486R9bpfiMR4piQdCryIenGsJk=
 github.com/nas-core/nascore v0.0.0-20250629094159-1f0c921c5177 h1:p4PHJX74yjJacA9l8CZTpI0jdYlnCHGdxAr9xNE6igs=
 github.com/nas-core/nascore v0.0.0-20250629094159-1f0c921c5177/go.mod h1:ube6A7tUDqIWlV6ACFBPEyRNEYiGc8yiDamvDl9n2ic=
+github.com/nas-core/nascore/nascore_util v0.0.0-20250630234505-fd65f4a29ad2 h1:hx3QBdZFl+c7e4KgL0ZuVCqLQXOlnx5+3UuhgmZa8k0=
+github.com/nas-core/nascore/nascore_util v0.0.0-20250630234505-fd65f4a29ad2/go.mod h1:3fOua4tOI8GPMZNW76dwzYDu0deOEkLYlwDnGXFFpqc=
 github.com/pelletier/go-toml v1.9.5 h1:4yBQzkHv+7BHq2PQUZF3Mx0IYxG7LsP222s7Agd3ve8=
 github.com/pelletier/go-toml/v2 v2.2.3 h1:YmeHyLY8mFWbdkNWwpr+qIL2bEqT0o95WSdkNHvL12M=
 github.com/pelletier/go-toml/v2 v2.2.3/go.mod h1:MfCQTFTvCcUyyvvwm1+G6H/jORL20Xlb6rzQu9GuUkc=

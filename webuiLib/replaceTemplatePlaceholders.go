@@ -3,7 +3,7 @@ package webuiLib
 import (
 	"strings"
 
-	"github.com/nas-core/nascore/pkgs/system_config"
+	"github.com/nas-core/nascore/nascore_util/system_config"
 )
 
 // replaceTemplatePlaceholders 替换模板中的占位符

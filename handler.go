@@ -10,7 +10,7 @@ import (
 	"github.com/nas-core/nascore/pkgs/isDevMode"
 	"github.com/nas-core/webui/webuiLib"
 
-	"github.com/nas-core/nascore/pkgs/system_config"
+	"github.com/nas-core/nascore/nascore_util/system_config"
 
 	"go.uber.org/zap"
 )
