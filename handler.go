@@ -39,7 +39,7 @@ func Webui_handler(nsCfg *system_config.SysCfg, logger *zap.SugaredLogger, qpsCo
 		}
 		var basePatch string
 		if isDevMode.IsDevMode() {
-			basePatch = "./handlers_http/webUI_ssi/wwwroot/"
+			basePatch = "/home/yh/myworkspace/nas-core/code-private/public_webui/wwwroot/"
 		} else {
 			basePatch = "wwwroot/"
 		}

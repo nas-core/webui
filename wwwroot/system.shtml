@@ -46,6 +46,7 @@
 
 
       <!--#include file="include/system_UserManager.html" -->
+      <!--#include file="include/system_nascoreExt.html" -->
 
 
       <!--#include file="include/system_DownloadMirror.html" -->

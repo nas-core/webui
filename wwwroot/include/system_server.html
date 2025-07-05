@@ -95,8 +95,10 @@
 
 
       <div class="mb-3">
-        <label for="TmpFilePath" class="form-label">TmpFilePath</label>
-        <input type="text" class="form-control" id="TmpFilePath" data-bind="Server.TmpFilePath">
+        <label for="UnixSocketFilePath" class="form-label">Socket文件路径 <small
+            class="form-text text-muted">用于和进程之间通讯，Linux下一般指定为/tmp/nascore.sock,
+            Windows下一般指定为D:\nascore\nascore.sock。</small></label>
+        <input type="text" class="form-control" id="UnixSocketFilePath" data-bind="Server.UnixSocketFilePath">
       </div>
     </div>
   </div>
