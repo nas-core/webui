@@ -1,0 +1,2 @@
+/* Tailwind 兼容页脚样式 */
+.footer { @apply w-full text-center text-xs text-gray-400 py-4 bg-transparent select-none; }

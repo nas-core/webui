@@ -1,0 +1,66 @@
+<!--#include file="include/meta.html" -->
+<link rel="stylesheet" href="css/theme_system_pages.css">
+<!--#include file="include/meta_theme_css.html" -->
+<!--#include file="include/meta_js.html" -->
+<script src="js/auth_check.js"></script>
+<!--#include file="include/header.html" -->
+<script>
+  window.onload = function () {
+    const token = localStorage.getItem('jwt_access_token');
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        if (!payload.IsAdmin) {
+          alert('您没有权限访问此页面');
+          history.back();
+        }
+      } catch (e) {
+        console.error('解析 JWT 失败:', e);
+        window.location.href = './login.shtml';
+      }
+    } else {
+      window.location.href = './login.shtml';
+    }
+  }
+</script>
+<div class="flex min-h-screen bg-gray-100 dark:bg-gray-900">
+  <!-- 侧边导航 -->
+  <!--#include file="include/system_side.html" -->
+  <!-- 主内容区域 -->
+  <div class="flex-1 flex flex-col">
+    <form id="mainform" class="flex-1 flex flex-col gap-6 p-4">
+      <!--#include file="include/system_server.html" -->
+      <!--#include file="include/system_jwt.html" -->
+      <!--#include file="include/system_secret.html" -->
+      <!--#include file="include/system_limit.html" -->
+      <!--#include file="include/system_webuiCDN.html" -->
+      <!--#include file="include/system_UserManager.html" -->
+      <!--#include file="include/system_nascoreExt.html" -->
+      <!--#include file="include/system_DownloadMirror.html" -->
+      <!--#include file="include/system_rclone.html" -->
+      <!--#include file="include/system_ddnsgo.html" -->
+      <!--#include file="include/system_AdGuard.html" -->
+      <!--#include file="include/system_lego.html" -->
+      <!--#include file="include/system_caddy2.html" -->
+      <!--#include file="include/system_openlist.html" -->
+      <div id="SettingSave" class="fixed bottom-0 left-0 w-full bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 p-4 flex items-center justify-between z-50">
+        <button type="button" class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" onclick="javascript:saveGlobalSetting()">保存设置</button>
+        <a href="./nascore.shtml" class="px-6 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded hover:bg-gray-300 dark:hover:bg-gray-600 ml-8">返回文件管理</a>
+      </div>
+    </form>
+    <!--#include file="include/system_UserManager_box_incloud_end.html" -->
+    <!--#include file="include/footer.html" -->
+    <script src="js/Settings_system.js"></script>
+    <script src="js/setting_usermanager.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/system_get_ddns_go.js"></script>
+    <script src="js/system_get_rclone_and_helper.js"></script>
+    <script src="js/system_get_StaticFile.js"></script>
+    <script src="js/system_get_lego_and_helper.js"></script>
+    <script src="js/system_get_caddy2.js"></script>
+    <script src="js/system_get_openlist.js"></script>
+    <!--#include file="include/caddyfile_edit.html" -->
+    <script src="js/caddyfile_edit.js"></script>
+    <script src="js/caddyfile_edit_for_caddyfile.js"></script>
+  </div>
+</div>

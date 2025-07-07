@@ -1,0 +1,18 @@
+<div id="LogPanel" class="fixed top-[10%] right-[10%] w-1/2 max-w-[600px] z-[1060] border border-black/20 rounded-lg bg-white dark:bg-gray-800 shadow-lg hidden">
+  <div class="flex items-center justify-between px-4 py-2 border-b border-black/10 dark:border-gray-700 bg-gray-100 dark:bg-gray-900 rounded-t-lg">
+    <h5 class="text-base font-semibold mb-0" id="LogPanelTitle">日志</h5>
+    <button type="button" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="Close"
+      onclick="document.getElementById('LogPanel').style.display='none';">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+    </button>
+  </div>
+  <div class="px-4 py-2">
+    <pre id="LogPanelContent" class="p-2 rounded bg-gray-50 dark:bg-gray-900 text-xs max-h-[60vh] overflow-y-auto whitespace-pre-wrap break-all"></pre>
+  </div>
+</div>
+
+<footer class="footer text-center py-4 text-gray-500 dark:text-gray-400 text-sm">
+  <p>nascore.eu.org <small>&copy; 2025 ver1.1</small></p>
+</footer>
+{{.WebUIPubLicCdn.footer}}
+<script src="js/public.js"></script>

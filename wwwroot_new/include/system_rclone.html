@@ -1,0 +1,32 @@
+<div id="ThirdPartyExtRclone" class="pt-16"></div>
+<div class="p-6">
+  <h3 class="text-lg font-bold mb-4">Rclone配置</h3>
+  <div class="space-y-4">
+    <div class="flex items-center gap-2">
+      <input type="checkbox" class="form-checkbox" id="RcloneAutoMountEnable" data-bind="ThirdPartyExt.Rclone.AutoMountEnable">
+      <label for="RcloneAutoMountEnable" class="ml-2">启用 Rclone自动挂载 <span class="text-xs text-gray-400">（请先手动执行正常后再启用）</span></label>
+    </div>
+    <div>
+      <label for="ThirdPartyExtRcloneDownLoadlink" class="block">rclone github下载地址 <button type="button" class="text-blue-600 underline text-xs" data-bs-toggle="modal" data-bs-target="#githubMirrorModal">设置 GitHub Mirror</button></label>
+      <input type="text" class="form-input mt-1 block w-full" id="ThirdPartyExtRcloneDownLoadlink" data-bind="ThirdPartyExt.Rclone.DownLoadlink">
+      <div class="text-xs text-gray-400">like: https://github.com/rclone/rclone/releases/download/v{ver}/rclone-v{ver}-{os}-{arch}.zip</div>
+    </div>
+    <div>
+      <label for="ThirdPartyExtRcloneVersion" class="block">Version</label>
+      <input type="text" class="form-input mt-1 block w-32" id="ThirdPartyExtRcloneVersion" data-bind="ThirdPartyExt.Rclone.Version">
+    </div>
+    <div>
+      <label for="RcloneBinPath" class="block">Rclone 路径 <button class="ml-2 px-2 py-1 bg-gray-200 rounded text-xs" onclick="downloadRclone()">下载安装rclone到指定路径</button></label>
+      <input type="text" class="form-input mt-1 block w-full" id="RcloneBinPath" data-bind="ThirdPartyExt.Rclone.BinPath">
+    </div>
+    <div>
+      <label for="ThirdPartyExtRcloneAutoMountCommand" class="block">rclone自动挂载命令 <button type="button" class="ml-2 px-2 py-1 bg-gray-200 rounded text-xs" onclick="copyRcloneMountCommand()">复制命令</button></label>
+      <textarea class="form-input mt-1 block w-full" id="ThirdPartyExtRcloneAutoMountCommand" data-bind="ThirdPartyExt.Rclone.AutoMountCommand"></textarea>
+      <div class="text-xs text-gray-400">（ 如果命令最后结尾 是字符 &nascore ，那么会作为后台命令执行）</div>
+    </div>
+    <div>
+      <label for="ThirdPartyExtRcloneAutoUnMountCommand" class="block">rclone自动卸载命令</label>
+      <textarea class="form-input mt-1 block w-full" id="ThirdPartyExtRcloneAutoUnMountCommand" data-bind="ThirdPartyExt.Rclone.AutoUnMountCommand"></textarea>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div id="ThirdPartyExtCaddy2" class="pt-16"></div>
+<div class="p-6">
+  <h3 class="text-lg font-bold mb-4">Caddy2 服务配置</h3>
+  <div class="space-y-4">
+    <div>
+      <label for="ThirdPartyExtCaddy2DownLoadlink" class="block">Caddy2 github下载地址 <button type="button" class="text-blue-600 underline text-xs" data-bs-toggle="modal" data-bs-target="#githubMirrorModal">设置 GitHub Mirror</button></label>
+      <input type="text" class="form-input mt-1 block w-full" id="ThirdPartyExtCaddy2DownLoadlink" data-bind="ThirdPartyExt.Caddy2.DownLoadlink">
+      <div class="text-xs text-gray-400">like: https://github.com/caddyserver/caddy/releases/download/v{ver}/caddy_{ver}_{os}_{arch}.tar.gz</div>
+    </div>
+    <div>
+      <label for="ThirdPartyExtCaddy2Version" class="block">Version</label>
+      <input type="text" class="form-input mt-1 block w-32" id="ThirdPartyExtCaddy2Version" data-bind="ThirdPartyExt.Caddy2.Version">
+    </div>
+    <div class="flex items-center gap-2">
+      <input type="checkbox" class="form-checkbox" id="Caddy2AutoStartEnable" data-bind="ThirdPartyExt.Caddy2.AutoStartEnable">
+      <label for="Caddy2AutoStartEnable" class="ml-2">启用 Caddy2 跟随启动</label>
+    </div>
+    <div>
+      <label for="Caddy2BinPath" class="block">Caddy2 路径 <button class="ml-2 px-2 py-1 bg-gray-200 rounded text-xs" onclick="downloadCaddy2()">下载Caddy2到指定路径</button></label>
+      <input type="text" class="form-input mt-1 block w-full" id="Caddy2BinPath" data-bind="ThirdPartyExt.Caddy2.BinPath">
+    </div>
+    <div>
+      <label for="ThirdPartyExtCaddy2ConfigPath" class="block">配置文件</label>
+      <input type="text" class="form-input mt-1 block w-full" id="ThirdPartyExtCaddy2ConfigPath" data-bind="ThirdPartyExt.Caddy2.ConfigPath">
+    </div>
+    <div>
+      <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" onclick="EditCaddy()">编辑网站配置</button>
+    </div>
+    <div class="text-xs text-gray-400">Caddy2 可以下载到和nascore 同目录下，并尝试解压，你也可以用其他方式自行下载安装。<br>如果自行安装的caddy2 记得修改路径，或者自行安装成服务模式。<br>编辑功能 目前仅仅支持Caddyfile格式的配置文件。</div>
+  </div>
+</div>

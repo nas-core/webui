@@ -1,0 +1,36 @@
+<div id="ThirdPartyExtLEGO" class="pt-16"></div>
+<div class="p-6">
+  <h3 class="text-lg font-bold mb-4">LEGO 配置</h3>
+  <div class="space-y-4">
+    <div class="flex items-center gap-2">
+      <input type="checkbox" class="form-checkbox" id="IsLegoAutoRenew" data-bind="ThirdPartyExt.AcmeLego.IsLegoAutoRenew">
+      <label for="IsLegoAutoRenew" class="ml-2">启用 LEGO 自动续订证书</label>
+    </div>
+    <div>
+      <label for="AutoUpdateCheckInterval" class="block">自动更新检查间隔 (小时)</label>
+      <input type="number" class="form-input mt-1 block w-32" id="AutoUpdateCheckInterval" data-bind="ThirdPartyExt.AcmeLego.AutoUpdateCheckInterval">
+    </div>
+    <div>
+      <label for="AcmeLegoCommand" class="block">运行命令 (Command) <button type="button" class="ml-2 px-2 py-1 bg-gray-200 rounded text-xs" onclick="copyLegoCommand()">复制命令</button></label>
+      <textarea class="form-input mt-1 block w-full" id="AcmeLegoCommand" rows="8" data-bind="ThirdPartyExt.AcmeLego.Command"></textarea>
+      <div class="text-xs text-gray-400">此命令是续签证书的时候要用的，如果你第一次使用可能需要手动执行一次接受 TOS。${BinPath} 和 ${LEGO_PATH} 对应本文的选项.nascore在运行的时候 会自动替换命令。<br>更多命令和说明请参考<a href="https://nascore.eu.org/docs/lego.html" target="_blank" class="underline">nascore docs lego</a><br>（ 如果命令最后结尾 是字符 &nascore ，那么会作为后台命令执行）</div>
+    </div>
+    <div>
+      <label for="AcmeLegoPath" class="block">LEGO 工作目录/证书存储目录 (LEGO_PATH)</label>
+      <input type="text" class="form-input mt-1 block w-full" id="AcmeLegoPath" data-bind="ThirdPartyExt.AcmeLego.LEGO_PATH">
+    </div>
+    <div>
+      <label for="AcmeLegoDownLoadlink" class="block">LEGO GitHub下载地址 <button type="button" class="text-blue-600 underline text-xs" data-bs-toggle="modal" data-bs-target="#githubMirrorModal">设置 GitHub Mirror</button></label>
+      <input type="text" class="form-input mt-1 block w-full" id="AcmeLegoDownLoadlink" data-bind="ThirdPartyExt.AcmeLego.DownLoadlink">
+      <div class="text-xs text-gray-400">like: https://github.com/go-acme/lego/releases/download/v{ver}/lego_v{ver}_{os}_{arch}.tar.gz</div>
+    </div>
+    <div>
+      <label for="AcmeLegoVersion" class="block">版本 (Version)</label>
+      <input type="text" class="form-input mt-1 block w-32" id="AcmeLegoVersion" data-bind="ThirdPartyExt.AcmeLego.Version">
+    </div>
+    <div>
+      <label for="AcmeLegoBinPath" class="block">LEGO 路径 <button class="ml-2 px-2 py-1 bg-gray-200 rounded text-xs" onclick="downloadLego()">下载LEGO到指定路径</button></label>
+      <input type="text" class="form-input mt-1 block w-full" id="AcmeLegoBinPath" data-bind="ThirdPartyExt.AcmeLego.BinPath">
+    </div>
+  </div>
+</div>

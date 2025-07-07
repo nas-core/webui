@@ -1,0 +1,35 @@
+<div id="ThirdPartyExtDdnsGO" class="pt-16"></div>
+<div class="p-6">
+  <h3 class="text-lg font-bold mb-4">DDNS-GO 配置</h3>
+  <div class="space-y-4">
+    <div>
+      <label for="ThirdPartyExtDdnsGODownLoadlink" class="block">DDNS github下载地址 <button type="button" class="text-blue-600 underline text-xs" data-bs-toggle="modal" data-bs-target="#githubMirrorModal">设置 GitHub Mirror</button></label>
+      <input type="text" class="form-input mt-1 block w-full" id="ThirdPartyExtDdnsGODownLoadlink" data-bind="ThirdPartyExt.DdnsGO.DownLoadlink">
+      <div class="text-xs text-gray-400">like: https://github.com/jeessy2/ddns-go/releases/download/v{ver}/ddns-go_{ver}_{os}_{arch}.tar.gz</div>
+    </div>
+    <div>
+      <label for="ThirdPartyExtDdnsGOVersion" class="block">Version</label>
+      <input type="text" class="form-input mt-1 block w-32" id="ThirdPartyExtDdnsGOVersion" data-bind="ThirdPartyExt.DdnsGO.Version">
+    </div>
+    <div class="flex items-center gap-2">
+      <input type="checkbox" class="form-checkbox" id="IsDDnsGOProxyEnable" data-bind="ThirdPartyExt.DdnsGO.IsDDnsGOProxyEnable">
+      <label for="IsDDnsGOProxyEnable" class="ml-2">启用 DDNS-GO 反向代理</label>
+    </div>
+    <div>
+      <label for="ThirdPartyExtReverseproxyUrl" class="block">DDNS-GO 反向代理地址 <span class="text-xs text-gray-400">（http://NasCore/{{.PrefixDdnsGo}}会反向代理这个地址 反响代理ddns-go）</span></label>
+      <input type="text" class="form-input mt-1 block w-full" id="ThirdPartyExtReverseproxyUrl" data-bind="ThirdPartyExt.DdnsGO.ReverseproxyUrl">
+    </div>
+    <div class="flex items-center gap-2">
+      <input type="checkbox" class="form-checkbox" id="DDNSGOAutoMountEnable" data-bind="ThirdPartyExt.DdnsGO.AutoStartEnable">
+      <label for="DDNSGOAutoMountEnable" class="ml-2">启用 DDNS-GO 跟随启动</label>
+    </div>
+    <div>
+      <label for="DdnsGOBinPath" class="block">DDNS-go 路径 <button class="ml-2 px-2 py-1 bg-gray-200 rounded text-xs" onclick="downloadDDNSGo()">下载DDNS-go到指定路径</button></label>
+      <input type="text" class="form-input mt-1 block w-full" id="DdnsGOBinPath" data-bind="ThirdPartyExt.DdnsGO.BinPath">
+    </div>
+    <div>
+      <label for="ThirdPartyExtDdnsGOConfigFilePath" class="block">配置文件 <button class="ml-2 px-2 py-1 bg-gray-200 rounded text-xs" onclick="resetDDNSGOPassword()">重置密码为nascore</button></label>
+      <input type="text" class="form-input mt-1 block w-full" id="ThirdPartyExtDdnsGOConfigFilePath" data-bind="ThirdPartyExt.DdnsGO.ConfigFilePath">
+    </div>
+  </div>
+</div>

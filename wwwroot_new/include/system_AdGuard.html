@@ -1,0 +1,34 @@
+<div id="ThirdPartyExtadguardhome" class="pt-16"></div>
+<div class="p-6">
+  <h3 class="text-lg font-bold mb-4">ADGuard-home 配置</h3>
+  <div class="space-y-4">
+    <div class="flex items-center gap-2">
+      <input type="checkbox" class="form-checkbox" id="IsAdGuardProxyEnable" data-bind="ThirdPartyExt.AdGuard.IsAdGuardProxyEnable">
+      <label for="IsAdGuardProxyEnable" class="ml-2">启用 ADGuard-home 反向代理</label>
+    </div>
+    <div>
+      <label for="ThirdPartyExtAdGuardReverseproxyUrl" class="block">AdGuard-home 反向代理地址 <span class="text-xs text-gray-400">（http://NasCore/{{.PrefixAdguardhome}}会反向代理这个地址 反响代理ADGuard）</span></label>
+      <input type="text" class="form-input mt-1 block w-full" id="ThirdPartyExtAdGuardReverseproxyUrl" data-bind="ThirdPartyExt.AdGuard.ReverseproxyUrl">
+    </div>
+    <div>
+      <label for="ThirdPartyExtAdGuardUpstream_dns_file" class="block">Upstream_dns_file 保存路径</label>
+      <input type="text" class="form-input mt-1 block w-full" id="ThirdPartyExtAdGuardUpstream_dns_file" data-bind="ThirdPartyExt.AdGuard.Upstream_dns_file">
+    </div>
+    <div>
+      <label for="ThirdPartyExtAdGuardUpstream_dns_fileUpdateUrl" class="block">Upstream_dns_file github更新地址 <button type="button" class="text-blue-600 underline text-xs" data-bs-toggle="modal" data-bs-target="#githubMirrorModal">设置 GitHub Mirror</button></label>
+      <input type="text" class="form-input mt-1 block w-full" id="ThirdPartyExtAdGuardUpstream_dns_fileUpdateUrl" data-bind="ThirdPartyExt.AdGuard.Upstream_dns_fileUpdateUrl">
+    </div>
+    <div>
+      <label for="ThirdPartyExtAdGuardYouDohUrlDomain" class="block">私有doh的domain 包括端口例如 example.com:60443</label>
+      <input type="text" class="form-input mt-1 block w-full" id="ThirdPartyExtAdGuardYouDohUrlDomain" data-bind="ThirdPartyExt.AdGuard.YouDohUrlDomain">
+    </div>
+    <div>
+      <label for="ThirdPartyExtAdGuardYouDohUrlSuffix" class="block">私有doh的后缀 例如 dns-query</label>
+      <input type="text" class="form-input mt-1 block w-full" id="ThirdPartyExtAdGuardYouDohUrlSuffix" data-bind="ThirdPartyExt.AdGuard.YouDohUrlSuffix">
+    </div>
+    <div class="flex items-center gap-2">
+      <input type="checkbox" class="form-checkbox" id="IsAdGuardAutoUpdateRulesEnable" data-bind="ThirdPartyExt.AdGuard.AutoUpdateRulesEnable">
+      <label for="IsAdGuardAutoUpdateRulesEnable" class="ml-2">启用自动更新规则 <button class="ml-2 px-2 py-1 bg-gray-200 rounded text-xs" onclick="downloadAdgRules()"> 手动更新一次</button></label>
+    </div>
+  </div>
+</div>

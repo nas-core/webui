@@ -1,0 +1,34 @@
+/* Tailwind 兼容亮色主题变量，保留原有变量供 js 及少量自定义样式使用 */
+:root[data-theme='light'] {
+  --bg-primary: #fff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --bg-nav: #0d6efd;
+  --bg-sidebar: #333;
+  --bg-card: #fff;
+  --bg-input: #fff;
+  --bg-hover: rgba(0,0,0,0.05);
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-tertiary: #adb5bd;
+  --text-nav: #fff;
+  --text-sidebar: #f8f9fa;
+  --text-muted: #6c757d;
+  --border-color: #dee2e6;
+  --border-hover: #adb5bd;
+  --btn-primary-bg: #0d6efd;
+  --btn-primary-color: #fff;
+  --btn-secondary-bg: #6c757d;
+  --btn-secondary-color: #fff;
+  --icon-folder: #ffc107;
+  --icon-file: #0d6efd;
+  --icon-image: #20c997;
+  --icon-video: #fd7e14;
+  --icon-audio: #d63384;
+  --icon-archive: #6f42c1;
+  --icon-code: #198754;
+  --icon-text: #0dcaf0;
+  --shadow-sm: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+  --shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+  --shadow-lg: 0 1rem 3rem rgba(0,0,0,0.175);
+}
