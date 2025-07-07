@@ -1,26 +1,35 @@
+<link rel="stylesheet" href="css/edit.css">
+
 <!-- 在线文件编辑模态框 -->
-<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 hidden" id="fileEditorModal">
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-2xl relative">
-    <div class="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700">
-      <h5 class="text-lg font-semibold flex items-center gap-2" id="fileEditorModalLabel">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>在线编辑
-        <small class="ml-2 text-gray-400" id="currentEditFilePath"></small>
-      </h5>
-      <button class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700" onclick="document.getElementById('fileEditorModal').classList.add('hidden')" aria-label="关闭">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-      </button>
-    </div>
-    <div class="p-4">
-      <textarea id="fileEditorContent" class="w-full h-64 p-2 rounded border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-sm text-gray-800 dark:text-gray-100" rows="20" spellcheck="false"></textarea>
-      <div class="flex justify-between items-center mt-2 text-xs text-gray-500 dark:text-gray-400">
-        <span>当前文件大小: <span id="editorFileSize">0 B</span></span>
-        <span>文件类型: <span id="editorFileType"></span></span>
+<div class="modal fade" id="fileEditorModal" tabindex="-1" aria-labelledby="fileEditorModalLabel" aria-hidden="true"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-editor modal-resizable modal-draggable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="fileEditorModalLabel">
+          <i class="bi bi-file-earmark-code me-2"></i>在线编辑
+          <small class="text-muted ms-2" id="currentEditFilePath"></small>
+        </h5>
+        <div class="d-flex align-items-center">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
+        </div>
       </div>
+      <div class="modal-body p-0">
+        <textarea id="fileEditorContent" class="form-control" rows="20" spellcheck="false"></textarea>
+        <div class="editor-info-bar">
+          <span>当前文件大小: <span id="editorFileSize">0 B</span></span>
+          <span>文件类型: <span id="editorFileType"></span></span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="saveFileContentBtn">保存</button>
+      </div>
+      <!-- 调整大小手柄 -->
+      <div class="resizable-handle resizable-handle-nw"></div>
+      <div class="resizable-handle resizable-handle-ne"></div>
+      <div class="resizable-handle resizable-handle-sw"></div>
+      <div class="resizable-handle resizable-handle-se"></div>
     </div>
-    <div class="flex justify-end gap-2 px-4 py-2 border-t border-gray-200 dark:border-gray-700">
-      <button class="px-4 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600" onclick="document.getElementById('fileEditorModal').classList.add('hidden')">取消</button>
-      <button class="px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700" id="saveFileContentBtn">保存</button>
-    </div>
-    <!-- 可拖动/缩放手柄可后续补充 -->
   </div>
 </div>

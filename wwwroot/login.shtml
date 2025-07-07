@@ -1,25 +1,36 @@
 <script>
   function isTokenExpired(expiresTimestamp) {
     if (!expiresTimestamp) return true
+    // 当前时间戳（毫秒）
     const now = Date.now()
+    // 过期时间戳（毫秒）
     var expires = parseInt(expiresTimestamp)
     expires = expires * 1000
+    // 如果过期时间小于当前时间，则认为已过期
     return expires < now
   }
+
   function checkAuthStatus() {
     const refreshToken = localStorage.getItem('jwt_refresh_token');
     const refreshTokenExpires = localStorage.getItem('jwt_refresh_token_expires');
+
+    // 如果没有refresh token，则未认证
     if (!refreshToken) {
       console.warn('未找到refresh token');
       return false;
     }
+
+    // 检查refresh token是否过期
     if (isTokenExpired(refreshTokenExpires)) {
       console.warn('refresh token已过期');
       return false;
     }
+
     return true;
   }
+
   if (checkAuthStatus()) {
+    // window.location.href = '/dashboard';
     window.location.href = './nascore.shtml';
   }
 </script>
@@ -29,70 +40,80 @@
 <!--#include file="include/meta_theme_css.html" -->
 <!--#include file="include/meta_js.html" -->
 
-<!-- Toasts容器 -->
-<div class="fixed top-4 left-4 z-[1100] flex flex-col gap-2">
-  <div id="rememberPasswordToast" class="hidden bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded shadow-lg min-w-[260px] max-w-xs" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="flex items-center mb-2">
-      <svg class="w-5 h-5 mr-2 text-yellow-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.366-.756 1.42-.756 1.786 0l7.451 15.377A1 1 0 0 1 16.451 20H3.549a1 1 0 0 1-.893-1.524L8.257 3.1zM11 16a1 1 0 1 0-2 0 1 1 0 0 0 2 0z" clip-rule="evenodd"/></svg>
-      <strong class="flex-1">安全提示</strong>
-      <button type="button" class="ml-2 text-gray-500 hover:text-gray-700" onclick="this.closest('#rememberPasswordToast').classList.add('hidden')" aria-label="Close">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
+<!-- 添加Toasts容器 -->
+<div class="toast-container position-fixed top-0 start-0 p-3">
+  <div id="rememberPasswordToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header bg-warning">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      <strong class="me-auto">安全提示</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
-    <div>
+    <div class="toast-body">
       <p class="mb-2">记住密码可能存在安全风险？</p>
-      <div class="flex justify-end gap-2">
-        <button type="button" class="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700" id="confirmRemember">我知道了</button>
+      <div class="d-flex justify-content-end gap-2">
+
+        <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="toast" id="confirmRemember">我知道了</button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-300 dark:from-gray-900 dark:to-gray-800">
-  <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 flex flex-col items-center">
-    <div class="flex flex-col items-center mb-6">
-      <img src="images/logo.webp" class="w-16 h-16 rounded-full shadow mb-2" alt="logo" />
-      <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-3">nascore</h1>
+<div class="login-container">
+  <div class="login-form card shadow">
+    <div class="login-logo">
+      <img src="images/logo.webp" />
+      <h1 class=" mt-3">nascore</h1>
     </div>
+
     <!-- 已保存账号列表界面 -->
-    <div id="saved-accounts-section" class="w-full mb-4 hidden">
-      <div class="saved-accounts-list mb-3"></div>
-      <div class="flex flex-col gap-2">
-        <button type="button" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded hover:bg-gray-300 dark:hover:bg-gray-600" onclick="switchToManualLogin()">
-          <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 2v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2m16 0v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2m16 0v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V2"/></svg>手动输入
+    <div id="saved-accounts-section" style="display:none">
+      <div class="saved-accounts-list mb-3">
+        <!-- 这里会动态插入已保存的账号列表 -->
+      </div>
+
+      <div class="d-grid gap-2">
+        <button type="button" class="btn btn-secondary" onclick="switchToManualLogin()">
+          <i class="bi bi-pencil-square me-1"></i>手动输入
         </button>
       </div>
     </div>
+
     <!-- 手动登录表单 -->
-    <form id="login-form" class="w-full">
-      <div class="mb-4">
-        <label for="username" class="block text-gray-700 dark:text-gray-200 mb-1">用户名</label>
-        <div class="flex items-center border rounded overflow-hidden bg-gray-50 dark:bg-gray-700">
-          <span class="px-3 text-gray-400"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0 1 12 15c2.485 0 4.797.657 6.879 1.804M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/></svg></span>
-          <input type="text" class="flex-1 py-2 px-3 bg-transparent outline-none text-gray-800 dark:text-gray-100" id="username" placeholder="请输入用户名" required>
+    <form id="login-form">
+      <div class="mb-3">
+        <label for="username" class="form-label">用户名</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          <input type="text" class="form-control" id="username" placeholder="请输入用户名" required>
         </div>
       </div>
-      <div class="mb-4">
-        <label for="password" class="block text-gray-700 dark:text-gray-200 mb-1">密码</label>
-        <div class="flex items-center border rounded overflow-hidden bg-gray-50 dark:bg-gray-700">
-          <span class="px-3 text-gray-400"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 11c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm0 0v4m0 4h.01"/></svg></span>
-          <input type="password" class="flex-1 py-2 px-3 bg-transparent outline-none text-gray-800 dark:text-gray-100" id="password" placeholder="请输入密码" required>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">密码</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input type="password" class="form-control" id="password" placeholder="请输入密码" required>
         </div>
       </div>
-      <div class="mb-4 flex items-center">
-        <input type="checkbox" class="mr-2 rounded border-gray-300 text-blue-600 focus:ring-blue-500" id="remember-password">
-        <label class="text-gray-700 dark:text-gray-200" for="remember-password">记住密码</label>
+
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="remember-password">
+        <label class="form-check-label" for="remember-password">记住密码</label>
       </div>
-      <div class="mt-6">
-        <button type="submit" class="w-full py-2 bg-blue-600 text-white rounded-lg text-lg font-semibold hover:bg-blue-700 transition">登录</button>
+
+      <div class="d-grid gap-2 mt-4">
+        <button type="submit" class="btn btn-primary btn-lg">登录</button>
       </div>
     </form>
-    <div class="mt-6 text-center w-full flex flex-col gap-2">
-      <button type="button" class="btn btn-sm btn-outline-secondary me-2 hidden" id="backToSavedAccountsBtn">
-        <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2h5"/></svg>选择已记录账号
+
+    <div class="mt-4 text-center">
+      <!-- 新增：切换回已记录账号列表按钮 -->
+      <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="backToSavedAccountsBtn"
+        style="display: none;">
+        <i class="bi bi-person-lines-fill me-1"></i>选择已记录账号
       </button>
-      <button class="px-3 py-1 border border-gray-300 dark:border-gray-600 rounded text-gray-600 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-xs" type="button" data-action="open-theme-modal">
-        <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>主题设置
+      <button class="btn btn-sm btn-outline-secondary" type="button" data-action="open-theme-modal">
+        <i class="bi bi-palette me-1"></i>主题设置
       </button>
     </div>
   </div>

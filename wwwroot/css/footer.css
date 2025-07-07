@@ -1,11 +1,21 @@
-/* Tailwind 兼容页脚样式（直接写静态类，兼容所有环境） */
+/* nascore - 页脚样式 */
+
 .footer {
-  width: 100%;
-  text-align: center;
-  font-size: 0.75rem;
-  color: #9ca3af; /* gray-400 */
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  background: transparent;
-  user-select: none;
+  min-height: 4rem;
+  color: var(--text-secondary);
+  padding: 1rem 2rem;
+}
+
+.footer p {
+  text-align: right;
+  margin: 0;
+}
+
+/* 响应式布局适配 */
+@media (max-width: 992px) {
+}
+
+/* 暗色主题适配 */
+:root[data-theme='dark'] .footer {
+  color: var(--text-sidebar);
 }

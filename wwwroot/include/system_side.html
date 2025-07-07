@@ -1,21 +1,146 @@
-<!-- 侧边栏导航（Tailwind重构） -->
-<div class="sidebar bg-gray-800 text-gray-100 w-56 min-w-[3.5rem] flex flex-col transition-all duration-200" id="sidebar">
-  <div class="flex items-center justify-end p-2">
-    <button class="sidebar-toggle text-gray-400 hover:text-gray-200" id="sidebarToggle">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-    </button>
+<link rel="stylesheet" href="css/nascore_side.css"> <!--不要改动 这个文件 -->
+<script src="js/side.js"></script> <!--不要改动 这个文件 -->
+<div class="sidebar bg-dark text-light">
+  <!-- 折叠按钮 -->
+  <div class="sidebar-toggle" id="sidebarToggle">
+    <i class="bi bi-chevron-left"></i>
   </div>
-  <nav class="flex-1">
-    <ul class="flex flex-col gap-1 px-2">
-      <li><a href="#system_server" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700 active:bg-gray-900"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v4a1 1 0 0 0 1 1h3v6a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-6h3a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1z"/></svg><span>服务器设置</span></a></li>
-      <li><a href="#system_jwt" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg><span>Jwt设置</span></a></li>
-      <li><a href="#system_secret" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg><span>secret设置</span></a></li>
-      <li><a href="#system_limit" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg><span>limit设置</span></a></li>
-      <li><a href="#system_webuiCDN" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg><span>WebuiCDN设置</span></a></li>
-      <li><a href="#hashUserManager" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg><span>用户管理</span></a></li>
-      <li><a href="#nascoreExt" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-700"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg><span>NasCore扩展</span></a></li>
-      <hr class="my-2 border-gray-700" />
-      <div class="ml-4 text-xs text-gray-400">第三方扩展</div>
+
+  <div class="sidebar-inner">
+    <!-- 文件操作主菜单 -->
+    <ul class="nav flex-column sidebar-menu">
+      <li class="nav-item" data-action="">
+        <a href="#system_server" class="nav-link active">
+          <i class="bi bi-hdd-network me-2"></i>
+          <span>服务器设置</span>
+        </a>
+      </li>
+
+      <li class="nav-item" data-action="">
+        <a href="#system_jwt" class="nav-link">
+          <i class="bi bi-key-fill me-2"></i>
+          <span>Jwt设置</span>
+        </a>
+      </li>
+
+
+      <li class="nav-item" data-action="">
+        <a href="#system_secret" class="nav-link">
+          <i class="bi bi-key me-2"></i>
+          <span>secret设置</span>
+        </a>
+      </li>
+      <li class="nav-item" data-action="">
+        <a href="#system_limit" class="nav-link">
+          <i class="bi bi-truck me-2"></i>
+          <span>limit设置</span>
+        </a>
+      </li>
+      <li class="nav-item" data-action="">
+        <a href="#system_webuiCDN" class="nav-link">
+          <i class="bi bi-magnet me-2"></i>
+          <span>WebuiCDN设置</span>
+        </a>
+      </li>
+
+
+      <li class="nav-item" data-action="my-files">
+        <a href="#hashUserManager" class="nav-link ">
+          <i class="bi bi-people me-2"></i>
+          <span>用户管理</span>
+        </a>
+      </li>
+      <li class="nav-item" data-action="my-files">
+        <a href="#nascoreExt" class="nav-link ">
+          <i class="bi bi-gift me-2"></i>
+          <span>NasCore扩展</span>
+        </a>
+      </li>
+      <hr />
+      <div style="margin-left: 1rem;">第三方扩展</div>
+      <hr />
+      <li class=" nav-item" data-action="my-files">
+        <a href="#ThirdPartyExtRclone" class="nav-link ">
+          <i class="bi bi-inboxes me-2"></i>
+          <span>Rclone挂载云储存</span>
+        </a>
+      </li>
+      <li class="nav-item" data-action="my-files">
+        <div class="nav-link d-flex justify-content-between align-items-center">
+          <div>
+            <a href="#ThirdPartyExtDdnsGO" class="text-light text-decoration-none"><i class="bi bi-inboxes me-2"></i>
+              <span>DDNS-GO动态解析</span></a>
+          </div>
+          <a href="{{.PrefixDdnsGo}}" target="_blank" class="text-light"><i class="bi bi-link-45deg me-2"></i></a>
+        </div>
+      </li>
+
+      <li class="nav-item" data-action="my-files">
+        <div class="nav-link d-flex justify-content-between align-items-center">
+          <div>
+            <a href="#ThirdPartyExtadguardhome" class="text-light text-decoration-none"><i
+                class="bi bi-inboxes me-2"></i>
+              <span>adguard DNS分流</span></a>
+          </div>
+          <a href="{{.PrefixAdguardhome}}" target="_blank" class="text-light"><i class="bi bi-link-45deg me-2"></i></a>
+        </div>
+      </li>
+
+      <li class="nav-item" data-action="my-files">
+        <a href="#ThirdPartyExtLEGO" class="nav-link ">
+          <i class="bi bi-inboxes me-2"></i>
+          <span>Lego SSL/TLS证书</span>
+        </a>
+      </li>
+
+
+      <li class="nav-item" data-action="my-files">
+        <a href="#ThirdPartyExtOpenlist" class="nav-link ">
+          <i class="bi bi-inboxes me-2"></i>
+          <span>OpenList/alist云盘服</span>
+        </a>
+      </li>
+
+
+      <li class="nav-item" data-action="my-files">
+        <div class="nav-link d-flex justify-content-between align-items-center">
+          <div>
+            <a href="javascript:EditCaddy()" class="text-light text-decoration-none"><i class="bi bi-inboxes me-2"></i>
+              <span>网站服务Caddy2</span>
+            </a>
+          </div>
+          <a href="#ThirdPartyExtCaddy2" class="text-light"><i class="bi bi-gear me-2"></i></a>
+
+        </div>
+      </li>
+
+
+
     </ul>
-  </nav>
+
+  </div>
 </div>
+
+<style>
+  /* 增加滚动条 防止小屏幕下 无法显示全*/
+  .sidebar-inner {
+    overflow-y: scroll;
+  }
+</style>
+
+<script>// 获取所有导航项
+  const navItems = document.querySelectorAll('.sidebar-menu .nav-item');
+
+  // 为每个导航项绑定点击事件
+  navItems.forEach(item => {
+    item.addEventListener('click', function () {
+      // 移除所有导航项的 active 类
+      navItems.forEach(navItem => {
+        navItem.querySelector('.nav-link').classList.remove('active');
+      });
+
+      // 为当前点击的导航项添加 active 类
+      this.querySelector('.nav-link').classList.add('active');
+    });
+  });
+</script>

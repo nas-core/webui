@@ -1,63 +1,75 @@
-<!-- 添加/编辑用户模态框（Tailwind重构） -->
-<div class="modal fixed inset-0 z-50 flex items-center justify-center bg-black/40 hidden" id="addUserModal">
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-lg relative">
-    <div class="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700">
-      <h5 class="text-lg font-semibold" id="addUserModalLabel">添加用户</h5>
-      <button class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700" onclick="document.getElementById('addUserModal').classList.add('hidden')" aria-label="关闭">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-      </button>
-    </div>
-    <div class="p-4">
-      <form id="addUserForm" class="space-y-4">
-        <div>
-          <label for="addUsername" class="block">用户名</label>
-          <input type="text" class="form-input w-full" id="addUsername" name="username">
-        </div>
-        <div>
-          <label for="addPasswd" class="block">密码</label>
-          <input type="password" class="form-input w-full" id="addPasswd" name="passwd">
-        </div>
-        <div>
-          <label for="addHome" class="block">主目录</label>
-          <input type="text" class="form-input w-full" id="addHome" name="home">
-        </div>
-      </form>
-      <div class="text-xs text-gray-400 mt-2">如需配置管理员，请手动修改配置文件。<br>这里操作的用户密码会被明文保存，请通知用户修改密码后会加密存储。<br>目前只支持最多5个用户。</div>
-    </div>
-    <div class="flex justify-end gap-2 px-4 py-2 border-t border-gray-200 dark:border-gray-700">
-      <button type="button" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600" onclick="document.getElementById('addUserModal').classList.add('hidden')">关闭</button>
-      <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" id="saveUserBtn">保存</button>
+<!-- 添加用户模态框 -->
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addUserModalLabel">添加用户</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addUserForm">
+          <div class="mb-3">
+            <label for="username" class="form-label">用户名</label>
+            <input type="text" class="form-control" id="addUsername" name="username">
+          </div>
+          <div class="mb-3">
+            <label for="passwd" class="form-label">密码
+              <input type="password" class="form-control" id="addPasswd" name="passwd">
+          </div>
+          <div class="mb-3">
+            <label for="home" class="form-label">主目录</label>
+            <input type="text" class="form-control" id="addHome" name="home">
+          </div>
+
+        </form>
+        <small class="form-text text-muted">
+          如需要配置管理员，请手动修改配置文件。<br>
+          这里操作的用户密码会被明文保存，请通知用户修改密码后会加密储存。<br>
+          目前只支持最多5个用户
+        </small>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="saveUserBtn">保存</button>
+      </div>
     </div>
   </div>
 </div>
+
 <!-- 编辑用户模态框 -->
-<div class="modal fixed inset-0 z-50 flex items-center justify-center bg-black/40 hidden" id="editUserModal">
-  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-lg relative">
-    <div class="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700">
-      <h5 class="text-lg font-semibold" id="editUserModalLabel">编辑用户</h5>
-      <button class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700" onclick="document.getElementById('editUserModal').classList.add('hidden')" aria-label="关闭">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-      </button>
-    </div>
-    <div class="p-4">
-      <form id="editUserForm" class="space-y-4">
-        <div>
-          <label for="editUsername" class="block">用户名</label>
-          <input type="text" class="form-input w-full" id="editUsername" name="username" readonly>
-        </div>
-        <div>
-          <label for="editPasswd" class="block">密码</label>
-          <input type="password" class="form-input w-full" id="editPasswd" name="passwd">
-        </div>
-        <div>
-          <label for="editHome" class="block">主目录</label>
-          <input type="text" class="form-input w-full" id="editHome" name="home">
-        </div>
-      </form>
-    </div>
-    <div class="flex justify-end gap-2 px-4 py-2 border-t border-gray-200 dark:border-gray-700">
-      <button type="button" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600" onclick="document.getElementById('editUserModal').classList.add('hidden')">关闭</button>
-      <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" id="saveEditUserBtn">保存</button>
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editUserModalLabel">编辑用户</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editUserForm">
+          <div class="mb-3">
+            <label for="editUsername" class="form-label">用户名</label>
+            <input type="text" class="form-control" id="editUsername" name="username" readonly>
+          </div>
+          <div class="mb-3">
+            <label for="editPasswd" class="form-label">密码 </label>
+            <input type="password" class="form-control" id="editPasswd" name="passwd">
+          </div>
+          <div class="mb-3">
+            <label for="editHome" class="form-label">主目录</label>
+            <input type="text" class="form-control" id="editHome" name="home">
+          </div>
+        </form>
+        <small class="form-text text-muted">
+          如需要配置管理员，请手动修改配置文件。<br>
+          这里操作的用户密码会被明文保存，请通知用户修改密码后会加密储存。<br>
+          目前只支持最多5个用户
+        </small>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" id="updateUserBtn">保存</button>
+      </div>
     </div>
   </div>
 </div>

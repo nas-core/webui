@@ -1,28 +1,40 @@
-/* Tailwind 兼容的文件预览样式，保留原有自定义部分，移除 Bootstrap 依赖 */
+/* 文件预览模态框扩展样式 */
+/* 注意：大部分样式直接使用Bootstrap的modal类，这里只添加额外的自定义样式 */
 
+/* 图片预览 */
 .file-preview-image {
-  @apply max-w-full max-h-[70vh] object-contain;
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
 }
 
+/* 视频预览 */
 .file-preview-video {
-  @apply max-w-full max-h-[70vh];
+  max-width: 100%;
+  max-height: 70vh;
 }
 
+/* 音频预览 */
 .file-preview-audio {
-  @apply w-full;
+  width: 100%;
 }
 
+/* 预览加载状态 */
 .file-preview-loading {
-  @apply flex items-center justify-center w-full h-[100px];
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
 }
 
 .file-preview-loading::after {
   content: '';
   width: 2rem;
   height: 2rem;
-  border: 0.25rem solid #e5e7eb; /* gray-200 */
+  border: 0.25rem solid #dee2e6;
   border-radius: 50%;
-  border-top-color: #3b82f6; /* blue-500 */
+  border-top-color: #007bff;
   animation: spin 1s linear infinite;
 }
 
@@ -32,8 +44,11 @@
   }
 }
 
+/* ArtPlayer容器 */
 .artplayer-app {
-  @apply w-full max-h-[70vh] h-[70vh];
+  width: 100%;
+  height: 70vh;
+  max-height: 70vh;
 }
 
 /* 拖动样式 */
@@ -41,29 +56,47 @@
   cursor: move;
 }
 
-.file-preview-modal .modal-body {
-  @apply p-4 flex items-center justify-center overflow-auto;
+/* 预览模态框大小调整 */
+.file-preview-modal .modal-dialog {
+  max-width: 80%;
+  max-height: 80%;
 }
 
+/* 预览模态框内容区 */
+.file-preview-modal .modal-body {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+/* 底部按钮样式 */
 .file-preview-modal .modal-footer {
-  @apply flex justify-between p-3 border-t border-gray-200 dark:border-gray-700;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #dee2e6;
 }
 
 .file-preview-modal .modal-footer .btn {
-  @apply min-w-[100px];
+  min-width: 100px;
 }
 
+/* 自适应屏幕 */
 @media (max-width: 768px) {
   .file-preview-modal .modal-dialog {
     max-width: 95%;
   }
+
   .artplayer-app {
     height: 50vh;
   }
+
   .file-preview-modal .modal-footer {
     flex-wrap: wrap;
     gap: 0.5rem;
   }
+
   .file-preview-modal .modal-footer .btn {
     flex: 1;
     min-width: 0;
