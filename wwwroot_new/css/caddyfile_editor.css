@@ -1,0 +1,15 @@
+/* Tailwind 兼容 Caddyfile 编辑器样式 */
+.caddyfile-editor {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  min-height: 320px;
+  font-family: monospace;
+  color: #374151;
+}
+.caddyfile-editor.dark {
+  background: #23272f;
+  color: #d1d5db;
+  border-color: #374151;
+}

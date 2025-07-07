@@ -1,0 +1,10 @@
+/* Tailwind 兼容系统设置页主题样式 */
+.system-page {
+  background: #f3f4f6;
+  min-height: 100vh;
+  color: #374151;
+}
+.system-page.dark {
+  background: #18181b;
+  color: #d1d5db;
+}

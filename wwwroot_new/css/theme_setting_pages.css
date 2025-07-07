@@ -1,0 +1,10 @@
+/* Tailwind 兼容设置页主题样式 */
+.setting-page {
+  background: #f8fafc;
+  min-height: 100vh;
+  color: #374151;
+}
+.setting-page.dark {
+  background: #18181b;
+  color: #d1d5db;
+}

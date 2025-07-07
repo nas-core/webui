@@ -1,0 +1,41 @@
+/* Tailwind 兼容右键菜单样式 */
+.file-context-menu {
+  position: absolute;
+  z-index: 1300;
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+  padding: 0.5rem 0;
+  display: none;
+}
+.file-context-menu.show {
+  display: block;
+}
+.file-context-menu.dark {
+  background: #23272f;
+  border-color: #374151;
+}
+.file-context-menu .context-menu-divider {
+  border-top: 1px solid #e5e7eb;
+  margin: 0.5rem 0;
+}
+.file-context-menu .context-menu-divider.dark {
+  border-top: 1px solid #374151;
+}
+.file-context-menu .context-menu-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: #374151;
+  transition: background 0.2s;
+}
+.file-context-menu .context-menu-item:hover {
+  background: #f3f4f6;
+}
+.file-context-menu .context-menu-item.dark {
+  color: #d1d5db;
+}
+.file-context-menu .context-menu-item.dark:hover {
+  background: #23272f;
+}

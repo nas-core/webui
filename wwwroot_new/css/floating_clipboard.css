@@ -1,0 +1,21 @@
+/* Tailwind 兼容浮动剪贴板样式 */
+.floating-clipboard {
+  position: fixed;
+  right: 1rem;
+  bottom: 5rem;
+  z-index: 1200;
+  background: #fff;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+  padding: 1rem;
+  min-width: 220px;
+  max-width: 320px;
+  transition: box-shadow 0.2s;
+}
+.floating-clipboard.dark {
+  background: #23272f;
+  color: #d1d5db;
+  border-color: #374151;
+}

@@ -1,0 +1,25 @@
+/* Tailwind 兼容通用主题样式，保留原有变量和结构，推荐直接用 Tailwind 类名写在 HTML/JS 生成的 DOM 上 */
+:root[data-theme='light'] {
+  --comme-bg: #f8fafc;
+  --comme-border: #e5e7eb;
+  --comme-text: #374151;
+}
+:root[data-theme='dark'] {
+  --comme-bg: #23272f;
+  --comme-border: #374151;
+  --comme-text: #d1d5db;
+}
+
+.comme-card {
+  background-color: var(--comme-bg);
+  border: 1px solid var(--comme-border);
+  color: var(--comme-text);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+  padding: 1rem;
+}
+
+.comme-divider {
+  border-top: 1px solid var(--comme-border);
+  margin: 1rem 0;
+}

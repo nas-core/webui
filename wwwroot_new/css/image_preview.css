@@ -1,0 +1,16 @@
+/* Tailwind 兼容图片预览样式 */
+.image-preview-modal {
+  background: rgba(0,0,0,0.7);
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image-preview-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.16);
+}
