@@ -1,50 +1,46 @@
-<!-- 添加在main-content div内部的开始位置 -->
-<link rel="stylesheet" href="css/mouse_rigth_file_memu.css">
-<script src="js/mouse_rigth_file_memu.js"></script>
-
-<!-- 文件上下文菜单 -->
-<div class="context-menu" id="fileContextMenu">
-  <div class="context-menu-item" data-action="new-folder">
-    <i class="bi bi-folder-plus"></i>新建文件夹
+<div class="absolute z-50 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-lg py-1 w-48 hidden" id="fileContextMenu">
+  <div class="px-4 py-2 text-xs text-gray-400">文件操作</div>
+  <div class="hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 cursor-pointer flex items-center gap-2" data-action="new-folder">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v4a1 1 0 0 0 1 1h3v6a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-6h3a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1z"/></svg>新建文件夹
   </div>
-  <div class="context-menu-item" data-action="new-file">
-    <i class="bi bi-file-earmark-plus"></i>新建文件
+  <div class="hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 cursor-pointer flex items-center gap-2" data-action="new-file">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>新建文件
   </div>
-  <div class="context-menu-divider"></div>
-  <div class="context-menu-item" data-action="cut">
-    <i class="bi bi-scissors"></i>剪切
+  <div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+  <div class="hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 cursor-pointer flex items-center gap-2" data-action="cut">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>剪切
   </div>
-  <div class="context-menu-item" data-action="copy">
-    <i class="bi bi-files"></i>复制
+  <div class="hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 cursor-pointer flex items-center gap-2" data-action="copy">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>复制
   </div>
-  <div class="context-menu-item" data-action="paste-cut">
-    <i class="bi bi-clipboard"></i>粘贴剪切的文件
+  <div class="hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 cursor-pointer flex items-center gap-2" data-action="paste-cut">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>粘贴剪切的文件
   </div>
-  <div class="context-menu-item" data-action="paste-copy">
-    <i class="bi bi-clipboard-plus"></i>粘贴复制的文件
+  <div class="hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 cursor-pointer flex items-center gap-2" data-action="paste-copy">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>粘贴复制的文件
   </div>
-  <div class="context-menu-divider"></div>
-  <div class="context-menu-item" data-action="edit">
-    <i class="bi bi-pencil"></i>编辑
+  <div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+  <div class="hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 cursor-pointer flex items-center gap-2" data-action="edit">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>编辑
   </div>
-  <div class="context-menu-item" data-action="open">
-    <i class="bi bi-folder2-open"></i>打开
+  <div class="hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 cursor-pointer flex items-center gap-2" data-action="open">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>打开
   </div>
-  <div class="context-menu-item" data-action="download">
-    <i class="bi bi-download"></i>下载
+  <div class="hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 cursor-pointer flex items-center gap-2" data-action="download">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>下载
   </div>
-  <div class="context-menu-item" data-action="upload">
-    <i class="bi bi-upload"></i>上传文件
+  <div class="hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 cursor-pointer flex items-center gap-2" data-action="upload">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>上传文件
   </div>
-  <div class="context-menu-divider"></div>
-  <div class="context-menu-item" data-action="compress">
-    <i class="bi bi-file-earmark-zip"></i>压缩
+  <div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+  <div class="hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 cursor-pointer flex items-center gap-2" data-action="compress">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>压缩
   </div>
-  <div class="context-menu-item" data-action="extract">
-    <i class="bi bi-archive"></i>解压
+  <div class="hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 cursor-pointer flex items-center gap-2" data-action="extract">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>解压
   </div>
-  <div class="context-menu-divider"></div>
-  <div class="context-menu-item" data-action="delete">
-    <i class="bi bi-trash"></i>删除
+  <div class="border-t border-gray-200 dark:border-gray-700 my-1"></div>
+  <div class="hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 cursor-pointer flex items-center gap-2 text-red-600" data-action="delete">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>删除
   </div>
 </div>

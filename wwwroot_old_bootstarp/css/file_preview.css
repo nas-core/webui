@@ -1,0 +1,104 @@
+/* 文件预览模态框扩展样式 */
+/* 注意：大部分样式直接使用Bootstrap的modal类，这里只添加额外的自定义样式 */
+
+/* 图片预览 */
+.file-preview-image {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+/* 视频预览 */
+.file-preview-video {
+  max-width: 100%;
+  max-height: 70vh;
+}
+
+/* 音频预览 */
+.file-preview-audio {
+  width: 100%;
+}
+
+/* 预览加载状态 */
+.file-preview-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+}
+
+.file-preview-loading::after {
+  content: '';
+  width: 2rem;
+  height: 2rem;
+  border: 0.25rem solid #dee2e6;
+  border-radius: 50%;
+  border-top-color: #007bff;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ArtPlayer容器 */
+.artplayer-app {
+  width: 100%;
+  height: 70vh;
+  max-height: 70vh;
+}
+
+/* 拖动样式 */
+.modal-header.draggable {
+  cursor: move;
+}
+
+/* 预览模态框大小调整 */
+.file-preview-modal .modal-dialog {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+/* 预览模态框内容区 */
+.file-preview-modal .modal-body {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+/* 底部按钮样式 */
+.file-preview-modal .modal-footer {
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #dee2e6;
+}
+
+.file-preview-modal .modal-footer .btn {
+  min-width: 100px;
+}
+
+/* 自适应屏幕 */
+@media (max-width: 768px) {
+  .file-preview-modal .modal-dialog {
+    max-width: 95%;
+  }
+
+  .artplayer-app {
+    height: 50vh;
+  }
+
+  .file-preview-modal .modal-footer {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .file-preview-modal .modal-footer .btn {
+    flex: 1;
+    min-width: 0;
+  }
+}

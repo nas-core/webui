@@ -1,43 +1,22 @@
-<div id="system_webuiCDN" style="padding-top: 4rem;"></div>
-<div class="container-fluid py-3">
-  <div class="row mt-4">
-    <div class="settingContainer">
-      <h3 class="mb-4">WebUI CDN设置</h3>
-      <a href="javascript:WebUIPubLicCdnAutoSet1()">使用预设1</a>
-      <a href="#system_server">修改此项后可能要同步修改静态文件服务器配置</a>
-      <div class="mb-3">
-        <label for="WebUIPubLicCdnHeader" class="form-label">Header</label>
-        <textarea class="form-control" id="WebUIPubLicCdnHeader" data-bind="WebUIPubLicCdn.Header"></textarea>
-      </div>
-
-      <div class="mb-3">
-        <label for="WebUIPubLicCdnFooter" class="form-label">Footer</label>
-        <textarea class="form-control" id="WebUIPubLicCdnFooter" data-bind="WebUIPubLicCdn.Footer"></textarea>
-      </div>
-      <div class="mb-3">
-        <label for="WebUIPubLicCdnDropzone" class="form-label">Dropzone</label>
-        <textarea class="form-control" id="WebUIPubLicCdnDropzone" data-bind="WebUIPubLicCdn.Dropzone"></textarea>
-      </div>
-
-      <div class="mb-3">
-        <label for="WebUIPubLicCdnArtplayer" class="form-label">Artplayer</label>
-        <textarea class="form-control" id="WebUIPubLicCdnArtplayer" data-bind="WebUIPubLicCdn.Artplayer"></textarea>
-      </div>
-
+<div id="system_webuiCDN" class="pt-16"></div>
+<div class="p-6">
+  <h3 class="text-lg font-bold mb-4">WebUI CDN设置</h3>
+  <div class="space-y-4">
+    <div>
+      <label for="WebUIPubLicCdnHeader" class="block">Header</label>
+      <textarea class="form-input mt-1 block w-full" id="WebUIPubLicCdnHeader" data-bind="WebUIPubLicCdn.Header"></textarea>
+    </div>
+    <div>
+      <label for="WebUIPubLicCdnFooter" class="block">Footer</label>
+      <textarea class="form-input mt-1 block w-full" id="WebUIPubLicCdnFooter" data-bind="WebUIPubLicCdn.Footer"></textarea>
+    </div>
+    <div>
+      <label for="WebUIPubLicCdnDropzone" class="block">Dropzone</label>
+      <textarea class="form-input mt-1 block w-full" id="WebUIPubLicCdnDropzone" data-bind="WebUIPubLicCdn.Dropzone"></textarea>
+    </div>
+    <div>
+      <label for="WebUIPubLicCdnArtplayer" class="block">Artplayer</label>
+      <textarea class="form-input mt-1 block w-full" id="WebUIPubLicCdnArtplayer" data-bind="WebUIPubLicCdn.Artplayer"></textarea>
     </div>
   </div>
 </div>
-<script>
-  function WebUIPubLicCdnAutoSet1() {
-    document.getElementById('WebUIPubLicCdnHeader').value = "<link href=\"\/@static\/bootstrap@5.1.2\/dist\/css\/bootstrap.min.css\" type=\"text\/css\"    rel=\"stylesheet\" \/>\n<link href = \"/@static\/bootstrap-icons@1.13.1\/font\/bootstrap-icons.css\"    type = \"text\/css\" rel = \"stylesheet\" \/>\n<script src=\"\/@static\/axios@0.26.0\/dist\/axios.min.js\" type=\"application\/javascript\"><\/script>";
-    document.getElementById('WebUIPubLicCdnFooter').value = "<script src=\"\/@static\/bootstrap@5.1.2\/dist\/js\/bootstrap.bundle.min.js\"  type=\"application\/javascript\"><\/script>"
-    document.getElementById('WebUIPubLicCdnDropzone').value = "<script src=\"\/@static\/dropzone@5.9.3\/dist\/min\/dropzone.min.js\"><\/script>"
-    document.getElementById('WebUIPubLicCdnArtplayer').value = "<script src=\"\/@static\/hls.js@1.5.18\/dist\/hls.min.js\"><\/script>\n<script src=\"\/@static\/artplayer@5.2.2\/dist\/artplayer.js\"><\/script>"
-
-    const event = new Event('input', {bubbles: true});
-    document.getElementById('WebUIPubLicCdnHeader').dispatchEvent(event);
-    document.getElementById('WebUIPubLicCdnFooter').dispatchEvent(event);
-    document.getElementById('WebUIPubLicCdnDropzone').dispatchEvent(event);
-    document.getElementById('WebUIPubLicCdnArtplayer').dispatchEvent(event);
-  }
-</script>

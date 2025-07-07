@@ -1,0 +1,49 @@
+<!-- 侧边导航 - 文件管理 -->
+<link rel="stylesheet" href="css/nascore_side.css">
+<script src="js/side.js"></script>
+
+<div class="sidebar bg-dark text-light">
+  <!-- 折叠按钮 -->
+  <div class="sidebar-toggle" id="sidebarToggle">
+    <i class="bi bi-chevron-left"></i>
+  </div>
+
+
+
+  <div class="sidebar-inner">
+    <!-- 文件操作主菜单 -->
+    <ul class="nav flex-column sidebar-menu">
+      <li class="nav-item" data-action="my-files">
+        <a href="nascore.shtml" class="nav-link active">
+          <i class="bi bi-folder me-2"></i>
+          <span>我的文件</span>
+        </a>
+      </li>
+      <li class="nav-item new-folder hide-on-settings-pages" data-action="new-folder">
+        <a href="#" class="nav-link">
+          <i class="bi bi-folder-plus me-2"></i>
+          <span>新建文件夹</span>
+        </a>
+      </li>
+      <li class="nav-item new-file hide-on-settings-pages" data-action="new-file">
+        <a href="#" class="nav-link">
+          <i class="bi bi-file-earmark-plus me-2"></i>
+          <span>新建文件</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="setting.shtml" class="nav-link">
+          <i class="bi bi-gear me-2"></i>
+          <span>设置</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="javascript:void(0)" onclick="loginOut()" class="nav-link">
+          <i class="bi bi-box-arrow-left me-2"></i>
+          <span>登出</span>
+        </a>
+      </li>
+    </ul>
+
+  </div>
+</div>

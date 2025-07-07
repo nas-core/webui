@@ -1,56 +1,39 @@
-<!-- 浮动剪贴板提示框 -->
-<div class="floating-clipboard" id="floatingClipboard" style="display: none;">
-  <div class="floating-clipboard-header">
-    <div class="clipboard-title">
-      <i class="bi bi-clipboard clipboard-icon" id="clipboardIcon"></i>
-      <span class="clipboard-action-text" id="clipboardActionText">剪贴板</span>
-      <span class="clipboard-count" id="clipboardCount">(0)</span>
+<div class="fixed bottom-8 right-8 z-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg w-80 max-w-full hidden" id="floatingClipboard">
+  <div class="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+    <div class="flex items-center gap-2">
+      <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+      <span class="font-semibold text-gray-700 dark:text-gray-200" id="clipboardActionText">剪贴板</span>
+      <span class="ml-2 text-xs text-gray-400" id="clipboardCount">(0)</span>
     </div>
-    <div class="clipboard-controls">
-      <button class="btn btn-sm btn-icon" id="toggleClipboardBtn" title="折叠/展开">
-        <i class="bi bi-chevron-up"></i>
+    <div class="flex items-center gap-1">
+      <button class="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700" id="toggleClipboardBtn" title="折叠/展开">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
       </button>
-      <button class="btn btn-sm btn-icon" id="clearAllClipboardBtn" title="清空全部">
-        <i class="bi bi-trash"></i>
+      <button class="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700" id="clearAllClipboardBtn" title="清空全部">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
       </button>
-      <button class="btn btn-sm btn-icon" id="closeClipboardBtn" title="关闭">
-        <i class="bi bi-x"></i>
+      <button class="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700" id="closeClipboardBtn" title="关闭">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
       </button>
     </div>
   </div>
-
-  <!-- 可折叠的内容区域 -->
-  <div class="floating-clipboard-content" id="floatingClipboardContent">
-    <div class="clipboard-actions">
-      <button class="btn btn-primary btn-sm" id="pasteAllBtn">
-        <i class="bi bi-clipboard" id="pasteAllIcon"></i>
-        <span id="pasteAllText">全部粘贴</span>
-      </button>
+  <div class="p-4" id="floatingClipboardContent">
+    <div class="mb-2">
+      <button class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs" id="pasteAllBtn">全部粘贴</button>
     </div>
-
-    <div class="clipboard-list" id="clipboardList">
-      <!-- 文件列表将通过JavaScript动态生成 -->
-    </div>
+    <div class="clipboard-list space-y-2" id="clipboardList"></div>
   </div>
 </div>
-
-<!-- 单个文件项模板 -->
 <template id="clipboardItemTemplate">
-  <div class="clipboard-item" data-path="">
-    <div class="item-info">
-      <i class="bi bi-file-earmark file-type-icon"></i>
-      <div class="item-details">
-        <div class="item-name"></div>
-        <div class="item-path"></div>
-      </div>
+  <div class="flex items-center justify-between px-2 py-1 border-b border-gray-100 dark:border-gray-700">
+    <div class="flex items-center gap-2">
+      <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+      <span class="item-name"></span>
+      <span class="item-path text-xs text-gray-400"></span>
     </div>
-    <div class="item-actions">
-      <button class="btn btn-sm btn-outline-primary paste-single-btn" title="单独粘贴">
-        <i class="bi bi-clipboard"></i>
-      </button>
-      <button class="btn btn-sm btn-outline-danger remove-item-btn" title="从列表中移除">
-        <i class="bi bi-x"></i>
-      </button>
+    <div class="flex items-center gap-1">
+      <button class="px-2 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 paste-single-btn" title="单独粘贴">粘贴</button>
+      <button class="px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 remove-item-btn" title="移除">移除</button>
     </div>
   </div>
 </template>

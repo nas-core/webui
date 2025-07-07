@@ -1,0 +1,69 @@
+/* Caddyfile Editor specific styles */
+
+/* Make the modal body a flex container */
+#fileEditorModalCaddy .modal-body {
+  display: flex;
+  flex-direction: column;
+  /* Ensure padding is handled by flex children or accounted for in height calculation if needed */
+  padding: 1rem; /* Adjust as per your original padding */
+  flex: 1; /* Allow modal-body to grow and shrink */
+  min-height: 0; /* Important for flex items to shrink below their content size */
+}
+
+/* Base style for editor areas to fill available space */
+#visualEditorArea,
+#manualEditorArea {
+  display: flex; /* Make these flex containers as well */
+  flex-direction: column;
+  flex: 1; /* Allow them to grow and shrink */
+  min-height: 0; /* Prevent content overflow */
+  padding: 0; /* Padding is already on modal-body, avoid double padding */
+}
+
+/* Specific styles for the table responsive area in visual editor */
+#visualEditorArea .table-responsive {
+  flex: 1; /* Allow table area to fill remaining space */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-bottom: 1rem; /* Add some space below the table */
+}
+.table-responsive2 {
+  max-height: calc(100vh - 15rem);
+
+  overflow: auto;
+}
+
+/* Specific styles for the textarea in manual editor */
+#manualEditorArea #CaddyfileEditorContent {
+  flex: 1; /* Allow textarea to fill remaining space */
+  resize: vertical; /* Allow manual vertical resizing if desired, but flex will handle initial size */
+  height: auto; /* Override default rows attribute */
+  min-height: calc(100vh - 15rem);
+  max-height: calc(100vh - 15rem);
+}
+
+/* Global modal height adjustment to ensure it doesn't exceed viewport height */
+/* This ensures the modal-body has a defined height to distribute */
+#fileEditorModalCaddy .modal-dialog {
+  display: flex;
+  align-items: center;
+}
+
+#fileEditorModalCaddy .modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Make content fill dialog height */
+  min-height: 0; /* Allow content to shrink */
+}
+
+/* Adjustments for general spacing if needed, using rem units */
+.mb-3 {
+  margin-bottom: 1rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.me-2 {
+  margin-right: 0.5rem;
+}

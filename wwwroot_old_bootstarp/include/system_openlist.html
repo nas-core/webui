@@ -1,0 +1,54 @@
+<div id="ThirdPartyExtOpenlist" style="padding-top: 4rem;"></div>
+<div class="container-fluid py-3">
+
+  <div class="row mt-4">
+    <div class="settingContainer">
+      <h3 class="mb-4">openlist 配置</h3>
+
+
+      <div class="mb-3">
+        <label for="ThirdPartyExtOpenlistDownLoadlink" class="form-label">openlist github下载地址 <button type="button"
+            class="btn  btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#githubMirrorModal">
+            设置 GitHub Mirror
+          </button></label>
+        <input type="text" class="form-control" id="ThirdPartyExtOpenlistDownLoadlink"
+          data-bind="ThirdPartyExt.Openlist.DownLoadlink">
+      </div>
+      <div> <small class="form-text text-muted">like:
+          https://github.com/OpenListTeam/OpenList/releases/download/v{ver}/openlist-{os}-{arch}.tar.gz</small>
+      </div>
+      <div class="mb-3">
+        <label for="ThirdPartyExtOpenlistVersion" class="form-label">Version</label>
+        <input type="text" class="form-control" id="ThirdPartyExtOpenlistVersion"
+          data-bind="ThirdPartyExt.Openlist.Version">
+      </div>
+
+
+      <div class="mb-3">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="OpenlistAutoMountEnable"
+            data-bind="ThirdPartyExt.Openlist.AutoStartEnable">
+          <label class="form-check-label" for="OpenlistAutoMountEnable">启用 OpenList 跟随启动 </label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="OpenlistBinPath" class="form-label">OpenList 路径 <button class="btn btn-secondary"
+            onclick="downloadOpenlist()">下载OpenList到指定路径</button>
+        </label>
+        <input type="text" class="form-control" id="OpenlistBinPath" data-bind="ThirdPartyExt.Openlist.BinPath">
+      </div>
+      <div class="mb-3">
+        <label for="ThirdPartyExtOpenlistDataPath" class="form-label">数据目录 <button class="btn btn-secondary"
+            onclick="resetOpenListPassword()">重制密码</button></label>
+        <input type="text" class="form-control" id="ThirdPartyExtOpenlistDataPath"
+          data-bind="ThirdPartyExt.Openlist.DataPath">
+      </div>
+
+      <div> <small class="form-text text-muted">
+          OpenList 可以下载到和nascore 同目录下，并尝试解压，你也可以用其他方式自行下载安装。<br>
+          如果自行安装的 OpenList 记得修改路径，或者自行安装成服务模式。</small>
+      </div>
+
+    </div>
+  </div>
+</div>

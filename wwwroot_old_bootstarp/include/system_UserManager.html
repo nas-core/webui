@@ -1,0 +1,42 @@
+<div id="hashUserManager" style="padding-top: 4rem;"></div>
+<div class="container-fluid py-3" id="container_UserManager">
+  <ul class="nav nav-tabs" id="usersTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button"
+        role="tab" aria-controls="users" aria-selected="false">
+        <i class="bi bi-people me-1"></i> 用户管理
+      </button>
+    </li>
+  </ul>
+
+  <div class="tab-content p-3 border border-top-0 rounded-bottom" id="usersTabContent">
+    <!-- 用户管理面板 -->
+    <div class="tab-pane fade show active" id="users" role="tabtheme_nascorepage" aria-labelledby="users-tab">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="m-0">用户管理</h3>
+        <button type="button" class="btn btn-primary" id="addUserBtn" data-bs-toggle="modal"
+          data-bs-target="#addUserModal">
+          <i class="bi bi-person-plus me-1"></i> 添加用户
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover" id="usersTable">
+          <thead>
+            <tr>
+              <th scope="col">用户名</th>
+              <th scope="col">密码</th>
+              <th scope="col">主目录</th>
+              <th scope="col">管理员</th>
+              <th scope="col">操作</th>
+            </tr>
+          </thead>
+          <tbody id="usersTableBody" data-bind="Users" data-bind-handler="renderUsersTable">
+            <!-- 动态生成用户数据 -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

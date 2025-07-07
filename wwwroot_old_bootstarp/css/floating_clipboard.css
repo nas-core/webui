@@ -1,0 +1,352 @@
+/* 浮动剪贴板样式 */
+.floating-clipboard {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
+  width: 22rem;
+  max-width: calc(100vw - 4rem);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-lg);
+  z-index: 1050;
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0);
+}
+
+.floating-clipboard.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* 剪贴板头部 */
+.floating-clipboard-header {
+  padding: 0.75rem 1rem;
+  background-color: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 0.5rem 0.5rem 0 0;
+  display: flex;
+  justify-content: between;
+  align-items: center;
+  cursor: move;
+  user-select: none;
+}
+
+.clipboard-title {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.clipboard-icon {
+  font-size: 1.125rem;
+  margin-right: 0.5rem;
+  color: var(--btn-primary-bg);
+}
+
+.clipboard-action-text {
+  margin-right: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.clipboard-count {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: normal;
+}
+
+.clipboard-controls {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.clipboard-controls .btn-icon {
+  width: 1.875rem;
+  height: 1.875rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.clipboard-controls .btn-icon:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.clipboard-controls .btn-icon i {
+  font-size: 0.875rem;
+}
+
+/* 剪贴板内容区域 */
+.floating-clipboard-content {
+  padding: 1rem;
+  max-height: 20rem;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+.floating-clipboard-content.collapsed {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+/* 操作按钮区域 */
+.clipboard-actions {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.clipboard-actions .btn {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+/* 文件列表 */
+.clipboard-list {
+  max-height: 12rem;
+  overflow-y: auto;
+}
+
+.clipboard-list::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.clipboard-list::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+  border-radius: 0.125rem;
+}
+
+.clipboard-list::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 0.125rem;
+}
+
+.clipboard-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* 单个剪贴板项目 */
+.clipboard-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  margin-bottom: 0.5rem;
+  background-color: var(--bg-secondary);
+  transition: all 0.2s ease;
+}
+
+.clipboard-item:last-child {
+  margin-bottom: 0;
+}
+
+.clipboard-item:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--btn-primary-bg);
+}
+
+/* 文件信息区域 */
+.item-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0; /* 确保文本可以被截断 */
+}
+
+.file-type-icon {
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-name {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  margin-bottom: 0.125rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.item-path {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 操作按钮区域 */
+.item-actions {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.item-actions .btn {
+  padding: 0.25rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+/* 统一剪贴板样式 */
+.clipboard-icon {
+  color: var(--btn-primary-bg);
+}
+
+/* 文件项左边框，用于区分操作类型 */
+.clipboard-item[data-action='cut'] {
+  border-left: 0.25rem solid #fd7e14;
+}
+
+.clipboard-item[data-action='copy'] {
+  border-left: 0.25rem solid #0dcaf0;
+}
+
+/* 空状态 */
+.clipboard-empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.clipboard-empty i {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-tertiary);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .floating-clipboard {
+    bottom: 5rem;
+    right: 1rem;
+    left: 1rem;
+    width: auto;
+    max-width: none;
+  }
+
+  .floating-clipboard-header {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .floating-clipboard-content {
+    padding: 0.75rem;
+    max-height: 15rem;
+  }
+
+  .clipboard-actions .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .clipboard-item {
+    padding: 0.375rem;
+  }
+
+  .item-name {
+    font-size: 0.8rem;
+  }
+
+  .item-path {
+    font-size: 0.7rem;
+  }
+
+  .item-actions .btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* 暗色主题适配 */
+:root[data-theme='dark'] .floating-clipboard {
+  background-color: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+:root[data-theme='dark'] .floating-clipboard-header {
+  background-color: var(--bg-tertiary);
+  border-color: var(--border-color);
+}
+
+:root[data-theme='dark'] .clipboard-item {
+  background-color: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+:root[data-theme='dark'] .clipboard-item:hover {
+  background-color: var(--bg-hover);
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.floating-clipboard.animate-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.floating-clipboard.animate-out {
+  animation: fadeOut 0.3s ease-in;
+}
+
+/* 拖拽功能样式 */
+.floating-clipboard.dragging {
+  user-select: none;
+  cursor: move;
+}
+
+.floating-clipboard.dragging .floating-clipboard-content {
+  pointer-events: none;
+}
+
+/* 折叠状态图标旋转 */
+.clipboard-controls .btn-icon i.rotate {
+  transform: rotate(180deg);
+}

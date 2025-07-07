@@ -1,0 +1,69 @@
+<div id="ThirdPartyExtRclone" style="padding-top: 4rem;"></div>
+<div class="container-fluid py-3">
+
+  <div class="row mt-4">
+    <div class="settingContainer">
+      <h3 class="mb-4">Rclone配置</h3>
+      <div class="mb-3">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="RcloneAutoMountEnable"
+            data-bind="ThirdPartyExt.Rclone.AutoMountEnable">
+          <label class="form-check-label" for="RcloneAutoMountEnable">启用 Rclone自动挂载
+            <small class="form-text text-muted">（请先手动执行正常后再启用）</small></label>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="ThirdPartyExtRcloneDownLoadlink" class="form-label">rclone github下载地址 <button type="button"
+            class="btn  btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#githubMirrorModal">
+            设置 GitHub Mirror
+          </button></label>
+        <input type="text" class="form-control" id="ThirdPartyExtRcloneDownLoadlink"
+          data-bind="ThirdPartyExt.Rclone.DownLoadlink">
+      </div>
+      <div> <small class="form-text text-muted">like:
+          https://github.com/rclone/rclone/releases/download/v{ver}/rclone-v{ver}-{os}-{arch}.zip</small>
+
+      </div>
+      <div class="mb-3">
+        <label for="ThirdPartyExtRcloneVersion" class="form-label">Version</label>
+        <input type="text" class="form-control" id="ThirdPartyExtRcloneVersion"
+          data-bind="ThirdPartyExt.Rclone.Version">
+      </div>
+
+      <div class="mb-3">
+        <label for="RcloneBinPath" class="form-label">Rclone 路径 <button class="btn btn-secondary"
+            onclick="downloadRclone()">下载安装rclone到指定路径</button>
+        </label>
+        <input type="text" class="form-control" id="RcloneBinPath" data-bind="ThirdPartyExt.Rclone.BinPath">
+      </div>
+      <div class="mb-3">
+        <label for="ThirdPartyExtRcloneAutoMountCommand" class="form-label">rclone自动挂载命令<small
+            class="form-text text-muted">（只在nascore启动的时候执行一次,如修改需要重启nascore生效）</small>
+          <button type="button" class="btn btn-sm btn-outline-secondary ms-2"
+            onclick="copyRcloneMountCommand()">复制命令</button>
+        </label>
+
+        <textarea class="form-control" id="ThirdPartyExtRcloneAutoMountCommand"
+          data-bind="ThirdPartyExt.Rclone.AutoMountCommand"></textarea>
+        <small class="form-text text-muted">（ 如果命令最后结束 是字符 &nascore ，那么会作为后台命令执行）</small>
+      </div>
+
+      <div class="mb-3">
+        <label for="ThirdPartyExtRcloneAutoUnMountCommand" class="form-label">rclone自动卸载命令<small
+            class="form-text text-muted">（只在nascore启动的时候执行一次，如修改需要重启nascore生效）</small></label>
+        <textarea class="form-control" id="ThirdPartyExtRcloneAutoUnMountCommand"
+          data-bind="ThirdPartyExt.Rclone.AutoUnMountCommand"></textarea>
+      </div>
+
+
+      <div>
+        <small class="form-text text-muted"> rclone的目录挂载 在linux 依赖 fuse,频繁挂载卸载可能会出错。请务必测试命令正常后
+          再托管到nascore的跟随启动启动挂载。<br />
+          nascore在挂载之前会先执行 卸载命令，nascore退出的时候也会执行卸载命令。</small>
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,106 @@
+<div id="ThirdPartyExtadguardhome" style="padding-top: 4rem;"></div>
+<div class="container-fluid py-3">
+  <div class="row mt-4">
+    <div class="settingContainer">
+      <h3 class="mb-4">ADGuard-home 配置</h3>
+      <div class="mb-3">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="IsAdGuardProxyEnable"
+            data-bind="ThirdPartyExt.AdGuard.IsAdGuardProxyEnable">
+          <label class="form-check-label" for="IsAdGuardProxyEnable">启用 ADGuard-home 反向代理</label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="ThirdPartyExtAdGuardReverseproxyUrl" class="form-label">AdGuard-home 反向代理地址
+          <small class="form-text text-muted"> （http://NasCore/{{.PrefixAdguardhome}}会反向代理这个地址
+            反响代理ADGuard）</small></label>
+        <input type="text" class="form-control" id="ThirdPartyExtAdGuardReverseproxyUrl"
+          data-bind="ThirdPartyExt.AdGuard.ReverseproxyUrl">
+      </div>
+
+      <div class="mb-3">
+        <label for="ThirdPartyExtAdGuardUpstream_dns_file" class="form-label">Upstream_dns_file 保存路径</label>
+        <input type="text" class="form-control" id="ThirdPartyExtAdGuardUpstream_dns_file"
+          data-bind="ThirdPartyExt.AdGuard.Upstream_dns_file">
+      </div>
+
+      <div class="mb-3">
+        <label for="ThirdPartyExtAdGuardUpstream_dns_fileUpdateUrl" class="form-label">Upstream_dns_file
+          github更新地址 <button type="button" class="btn  btn-link btn-sm" data-bs-toggle="modal"
+            data-bs-target="#githubMirrorModal">
+            设置 GitHub Mirror
+          </button></label>
+        <input type="text" class="form-control" id="ThirdPartyExtAdGuardUpstream_dns_fileUpdateUrl"
+          data-bind="ThirdPartyExt.AdGuard.Upstream_dns_fileUpdateUrl">
+      </div>
+
+      <div class="mb-3">
+        <label for="ThirdPartyExtAdGuardYouDohUrlDomain" class="form-label">私有doh的domain 包括端口例如
+          example.com:60443</label>
+        <input type="text" class="form-control" id="ThirdPartyExtAdGuardYouDohUrlDomain"
+          data-bind="ThirdPartyExt.AdGuard.YouDohUrlDomain">
+      </div>
+
+      <div class="mb-3">
+        <label for="ThirdPartyExtAdGuardYouDohUrlSuffix" class="form-label">私有doh的后缀 例如 dns-query</label>
+        <input type="text" class="form-control" id="ThirdPartyExtAdGuardYouDohUrlSuffix"
+          data-bind="ThirdPartyExt.AdGuard.YouDohUrlSuffix">
+      </div>
+
+      <div class="mb-3">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="IsAdGuardAutoUpdateRulesEnable"
+            data-bind="ThirdPartyExt.AdGuard.AutoUpdateRulesEnable">
+          <label class="form-check-label" for="IsAdGuardAutoUpdateRulesEnable">启用自动更新规则 <button
+              class="btn btn-secondary" onclick="downloadAdgRules()"> 手动更新一次</button>
+          </label>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="ThirdPartyExtAdGuardAutoUpdateRulesInterval" class="form-label">自动更新规则间隔 (小时)</label>
+        <input type="number" class="form-control" id="ThirdPartyExtAdGuardAutoUpdateRulesInterval"
+          data-bind="ThirdPartyExt.AdGuard.AutoUpdateRulesInterval">
+      </div>
+      <div>
+        NasCore 可以提供基于子目录的ADGuard-home的webui访问功能，你无需再去额外给他做反向代理<br>
+        NasCore 支持自动更新ADGuard-home的upstream_dns_file分流规则文件，详情请参考<a href="https://github.com/joyanhui/adguardhome-rules"
+          target="_blank">adguardhome-rules
+          File</a><br>
+        NasCore 暂不支持ADGuard的自动安装和跟随启动，你可以用docker或者包管理器或者<a
+          href="https://adguard.com/zh_cn/adguard-linux/overview.html#instructions" target="_blank">ADGuard官方安装脚本</a>
+        安装<br>
+        因为adguardhome去广告功能比较完善，并且有webui,性能也够好，所以NasCore暂时不打算支持mosdns，<br>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<script>
+
+
+  async function downloadAdgRules() {
+    const DownLoadlink = document.getElementById('ThirdPartyExtAdGuardUpstream_dns_fileUpdateUrl').value
+    const ThirdPartyExtGitHubDownloadMirror = document.getElementById('ThirdPartyExtGitHubDownloadMirror').value
+    const Savepath = document.getElementById('ThirdPartyExtAdGuardUpstream_dns_file').value
+
+    showNotification('DDNS-Go 正在下载，请不要离开页面', 'info')
+
+    try {
+      const response = await API.request(
+        `{{.ServerUrl}}/@api/admin/get_adguard_rules?DownLoadlink=${encodeURIComponent(DownLoadlink)}&GitHubDownloadMirror=${encodeURIComponent(ThirdPartyExtGitHubDownloadMirror)}&savepath=${encodeURIComponent(Savepath)}`,
+        {},
+        {needToken: true}
+      )
+
+      if (response.code < 10) {
+        showNotification('DDNS-Go 下载成功', 'success')
+      } else {
+        showNotification('DDNS-Go 下载失败: ' + response.message, 'danger')
+      }
+    } catch (error) {
+      showNotification('DDNS-Go 下载出错: ' + error.message, 'danger')
+    }
+  }
+</script>

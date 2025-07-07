@@ -1,0 +1,126 @@
+/* 面包屑导航 */
+.breadcrumb-container {
+  padding: 0.75rem 1rem;
+  background-color: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+  position: fixed;
+  top: 3.5rem; /* 与header底部对齐 */
+  width: calc(100% - 15rem); /* 默认状态下的宽度 */
+  z-index: 1020;
+  transition: all 0.3s; /* 与sidebar同步的过渡效果 */
+}
+.breadcrumb-item {
+  color: var(--text-secondary);
+}
+
+.breadcrumb-item a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.breadcrumb-item.active {
+  color: var(--text-primary);
+}
+
+.breadcrumb-item a {
+  color: var(--text-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.breadcrumb-item a:hover {
+  color: var(--btn-primary-bg);
+}
+
+.path-editor {
+  padding: 0.375rem 0;
+}
+
+.path-editor .input-group {
+  max-width: 600px;
+}
+
+.path-editor .form-control {
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.path-editor .input-group-text {
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+.breadcrumb-item.fade-out {
+  opacity: 0;
+}
+
+.breadcrumb-item.fade-in {
+  opacity: 1;
+}
+/* 编辑路径按钮样式 */
+#editPathBtn:hover {
+  color: var(--btn-primary-bg);
+  background-color: var(--bg-hover);
+}
+
+#editPathBtn.active {
+  color: var(--btn-primary-bg);
+  background-color: var(--bg-hover);
+}
+/* 面包屑操作按钮样式 */
+.breadcrumb-container .btn-icon {
+  width: 2.375rem;
+  height: 2.375rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  background: transparent;
+  border-radius: 50%;
+  transition: all var(--transition-speed) ease;
+}
+
+.breadcrumb-container .btn-icon:hover {
+  background-color: var(--bg-hover);
+  color: var(--btn-primary-bg);
+}
+
+.breadcrumb-container .btn-icon i {
+  font-size: 1.25rem;
+}
+/* 面包屑导航项动画 */
+.breadcrumb-item {
+  transition: opacity 0.2s ease-in-out;
+}
+/* 响应式设计 */
+@media (max-width: 992px) {
+  .breadcrumb-container {
+    width: calc(100% - 4rem);
+  }
+  /* 小屏幕下的面包屑样式 */
+  .breadcrumb-item {
+    max-width: 10ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* 除了最后一个面包屑项都隐藏 */
+  .breadcrumb-item:not(:last-child):not(:first-child) {
+    display: none;
+  }
+
+  /* 第一个项目（根目录）始终显示 */
+  .breadcrumb-item:first-child {
+    display: inline-flex;
+  }
+
+  /* 最后一个项目完整显示 */
+  .breadcrumb-item:last-child {
+    max-width: none;
+    overflow: visible;
+  }
+}

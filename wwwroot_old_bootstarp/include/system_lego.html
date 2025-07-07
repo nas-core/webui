@@ -1,0 +1,73 @@
+<div id="ThirdPartyExtLEGO" style="padding-top: 4rem;"></div>
+<div class="container-fluid py-3">
+
+  <div class="row mt-4">
+    <div class="settingContainer">
+      <h3 class="mb-4">LEGO 配置</h3>
+
+      <div class="mb-3">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="IsLegoAutoRenew"
+            data-bind="ThirdPartyExt.AcmeLego.IsLegoAutoRenew">
+          <label class="form-check-label" for="IsLegoAutoRenew">启用 LEGO 自动续订证书</label>
+        </div>
+      </div>
+
+
+      <div class="mb-3">
+        <label for="AutoUpdateCheckInterval" class="form-label">自动更新检查间隔 (小时)</label>
+        <input type="number" class="form-control" id="AutoUpdateCheckInterval"
+          data-bind="ThirdPartyExt.AcmeLego.AutoUpdateCheckInterval">
+      </div>
+
+      <div class="mb-3">
+        <label for="AcmeLegoCommand" class="form-label">运行命令 (Command)
+          <button type="button" class="btn btn-sm btn-outline-secondary ms-2" onclick="copyLegoCommand()">复制命令</button>
+        </label>
+        <textarea class="form-control" id="AcmeLegoCommand" rows="8"
+          data-bind="ThirdPartyExt.AcmeLego.Command"></textarea>
+        <small class="form-text text-muted">此命令是续签证书的时候要用的，如果你第一次使用可能需要手动执行一次接受 TOS。${BinPath} 和 ${LEGO_PATH}
+          对应本文的选项.nascore在运行的时候 会自动替换命令。
+          <br>
+          更多命令和说明请参考<a href="https://nascore.eu.org/docs/lego.html" target="_blank">nascore docs lego</a>
+        </small>
+        <small class="form-text text-muted">（ 如果命令最后结束 是字符 &nascore ，那么会作为后台命令执行）</small>
+
+      </div>
+
+      <div class="mb-3">
+        <label for="AcmeLegoPath" class="form-label">LEGO 工作目录/证书储存目录 (LEGO_PATH)</label>
+        <input type="text" class="form-control" id="AcmeLegoPath" data-bind="ThirdPartyExt.AcmeLego.LEGO_PATH">
+      </div>
+      <div class="mb-3">
+        <label for="AcmeLegoDownLoadlink" class="form-label">LEGO GitHub下载地址 <button type="button"
+            class="btn  btn-link btn-sm" data-bs-toggle="modal" data-bs-target="#githubMirrorModal">
+            设置 GitHub Mirror
+          </button></label>
+        <input type="text" class="form-control" id="AcmeLegoDownLoadlink"
+          data-bind="ThirdPartyExt.AcmeLego.DownLoadlink">
+      </div>
+      <div> <small class="form-text text-muted">like:
+          https://github.com/go-acme/lego/releases/download/v{ver}/lego_v{ver}_{os}_{arch}.tar.gz</small>
+      </div>
+
+      <div class="mb-3">
+        <label for="AcmeLegoVersion" class="form-label">版本 (Version)</label>
+        <input type="text" class="form-control" id="AcmeLegoVersion" data-bind="ThirdPartyExt.AcmeLego.Version">
+      </div>
+
+      <div class="mb-3">
+        <label for="AcmeLegoBinPath" class="form-label">LEGO 路径 <button class="btn btn-secondary"
+            onclick="downloadLego()">下载 LEGO 到指定路径</button>
+        </label>
+        <input type="text" class="form-control" id="AcmeLegoBinPath" data-bind="ThirdPartyExt.AcmeLego.BinPath">
+      </div>
+
+
+      <div><small class="form-text text-muted">
+          LEGO 可以下载到和 NasCore 同目录下，并尝试解压。你也可以用其他方式自行下载安装。 如果自行安装的 LEGO 记得二进制路径。</small>
+      </div>
+
+    </div>
+  </div>
+</div>

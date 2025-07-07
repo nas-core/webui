@@ -1,56 +1,46 @@
 <!--#include file="include/meta.html" -->
 <link rel="stylesheet" href="css/theme_nascore_page.css">
 <link rel="stylesheet" href="css/file_bulk_actions.css">
-<link rel="stylesheet" href="css/edit.css"> <!-- 新增: 在线编辑的CSS -->
-<link rel="stylesheet" href="css/floating_clipboard.css"> <!-- 新增: 浮动剪贴板CSS -->
-<link rel="stylesheet" href="css/image_preview.css"> <!-- 新增: 图片预览CSS -->
-<link rel="stylesheet" href="css/grid_view.css"> <!-- 新增: 网格视图CSS -->
-<link rel="stylesheet" href="css/file_preview.css"> <!-- 新增: 文件预览CSS -->
+<link rel="stylesheet" href="css/edit.css">
+<link rel="stylesheet" href="css/floating_clipboard.css">
+<link rel="stylesheet" href="css/image_preview.css">
+<link rel="stylesheet" href="css/grid_view.css">
+<link rel="stylesheet" href="css/file_preview.css">
 <!--#include file="include/meta_theme_css.html" -->
 <!--#include file="include/meta_js.html" -->
 <script src="js/auth_check.js"></script>
 <!--#include file="include/header.html" -->
 
-<div class="main-content">
+<div class="flex min-h-screen bg-gray-100 dark:bg-gray-900">
   <!-- 侧边导航 -->
   <!--#include file="include/nascore_side.html" -->
-
   <!-- 主内容区域 -->
-  <div class="content-wrapper">
+  <div class="flex-1 flex flex-col">
     <!-- 面包屑导航 -->
     <!--#include file="include/breadcrumb.html" -->
-
-    <!-- 文件列表 -->
+    <!-- 文件列表和右键菜单 -->
     <!--#include file="include/mouse_rigth_file_memu.html" -->
-
-    <div class="file-list detailed-list" id="fileListContainer">
+    <div class="file-list detailed-list flex-1 p-4" id="fileListContainer">
       <!-- 列表头部 -->
-      <div class="file-list-header">
-        <div class="row align-items-center">
-          <div class="col-6 col-md-5">
-            <span class="sort-header" data-sort="name">名称 <i class="bi bi-arrow-up"></i></span>
+      <div class="file-list-header mb-2">
+        <div class="grid grid-cols-12 items-center text-xs font-semibold text-gray-600 dark:text-gray-300">
+          <div class="col-span-6 md:col-span-5">
+            <span class="sort-header cursor-pointer" data-sort="name">名称 <i class="bi bi-arrow-up"></i></span>
           </div>
-          <div class="col-md-2 d-none d-md-block">
-            <span class="sort-header" data-sort="size">大小</span>
+          <div class="col-span-2 hidden md:block">
+            <span class="sort-header cursor-pointer" data-sort="size">大小</span>
           </div>
-          <div class="col-6 col-md-5 text-end text-md-start">
-            <span class="sort-header" data-sort="modified">最后修改</span>
+          <div class="col-span-6 md:col-span-5 text-right md:text-left">
+            <span class="sort-header cursor-pointer" data-sort="modified">最后修改</span>
           </div>
         </div>
       </div>
-
-      <!-- 文件列表项 -->
-
-
-
+      <!-- 文件列表项由js动态生成 -->
     </div>
-
     <!-- 批量操作工具栏 -->
     <!--#include file="include/file_bulk_actions.html" -->
-
     <!-- 浮动剪贴板 -->
     <!--#include file="include/floating_clipboard.html" -->
-
     <script src="js/api.js"></script>
     <script src="js/fileOperations.js"></script>
     <script src="js/compress_extract.js"></script>
@@ -62,19 +52,12 @@
     <script src="js/view_mode.js"></script>
     <script src="js/breadcrumb.js"></script>
     <script src="js/floating_clipboard.js"></script>
-
     {{.WebUIPubLicCdn.Dropzone}}
-
     <!--#include file="include/upload.html" -->
     <script src="js/upload.js"></script>
-    <!-- 文件操作工具和预览功能 -->
     {{.WebUIPubLicCdn.Artplayer}}
     <script src="js/fileUtility.js"></script>
     <script src="js/filePreview.js"></script>
-
-
-
-
     <!--#include file="include/footer.html" -->
   </div>
 </div>

@@ -1,0 +1,204 @@
+/* nascore - 暗色主题变量定义 */
+
+/* 暗色主题CSS变量 */
+:root[data-theme='dark'] {
+  --bg-primary: #212529; /* 主背景色 */
+  --bg-secondary: #2c3034; /* 次级背景色，如主体内容背景 */
+  --bg-tertiary: #343a40; /* 第三级背景色，用于更深的区域，如表头 */
+  --bg-nav: #102458; /* 导航栏背景色 */
+  --bg-sidebar: #111; /* 侧边栏背景色 */
+  --bg-card: #2c3034; /* 卡片背景色 */
+  --bg-input: #343a40; /* 输入框背景色 */
+  --bg-hover: rgba(255, 255, 255, 0.05); /* 鼠标悬停背景色 */
+  --bg-dropdown: #2c3034; /* 下拉菜单背景色 */
+  --bg-dropdown-hover: #343a40; /* 下拉菜单悬停背景色 */
+
+  --text-primary: #f8f9fa; /* 主文本颜色 */
+  --text-secondary: #e9ecef; /* 次级文本颜色 */
+  --text-tertiary: #adb5bd; /* 第三级文本颜色，用于辅助信息 */
+  --text-nav: #ffffff; /* 导航文本颜色 */
+  --text-sidebar: #f8f9fa; /* 侧边栏文本颜色 */
+  --text-muted: #adb5bd; /* 静默文本颜色 */
+
+  --border-color: #495057; /* 边框颜色 */
+  --border-hover: #6c757d; /* 边框悬停颜色 */
+
+  --btn-primary-bg: #0d6efd; /* 主按钮背景色 */
+  --btn-primary-color: #ffffff; /* 主按钮文本颜色 */
+  --btn-secondary-bg: #6c757d; /* 次按钮背景色 */
+  --btn-secondary-color: #ffffff; /* 次按钮文本颜色 */
+
+  --icon-folder: #ffc107;
+  --icon-file: #0d6efd;
+  --icon-image: #20c997;
+  --icon-video: #fd7e14;
+  --icon-audio: #d63384;
+  --icon-archive: #6f42c1;
+  --icon-code: #198754;
+  --icon-text: #0dcaf0;
+
+  --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+  --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.4);
+}
+
+/* 暗色主题下拉菜单和列表样式 */
+:root[data-theme='dark'] .dropdown-menu {
+  background-color: var(--bg-dropdown);
+  border-color: var(--border-color);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+}
+
+:root[data-theme='dark'] .dropdown-item {
+  color: var(--text-primary);
+}
+
+:root[data-theme='dark'] .dropdown-item:hover,
+:root[data-theme='dark'] .dropdown-item:focus {
+  background-color: var(--bg-dropdown-hover);
+  color: var(--text-primary);
+}
+
+:root[data-theme='dark'] .dropdown-divider {
+  border-color: var(--border-color);
+}
+
+:root[data-theme='dark'] .dropdown-submenu > a:after {
+  border-left-color: var(--text-primary);
+}
+
+/* 暗色主题列表组样式 */
+:root[data-theme='dark'] .list-group-item {
+  background-color: var(--bg-dropdown);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* 修复面包屑和文件列表头部背景色 */
+:root[data-theme='dark'] .breadcrumb-container,
+:root[data-theme='dark'] .file-list-header {
+  background-color: var(--bg-tertiary) !important;
+  border-color: var(--border-color);
+}
+
+/* 修复文件项背景色 */
+:root[data-theme='dark'] .file-item {
+  background-color: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+:root[data-theme='dark'] .file-item:hover {
+  background-color: var(--bg-hover);
+}
+
+:root[data-theme='dark'] .list-group-item:hover {
+  background-color: var(--bg-dropdown-hover);
+}
+
+:root[data-theme='dark'] .list-group-item.active {
+  background-color: var(--btn-primary-bg);
+  border-color: var(--btn-primary-bg);
+  color: #fff;
+}
+
+:root[data-theme='dark'] .list-group-item .text-muted {
+  color: var(--text-tertiary) !important;
+}
+
+/* 暗色主题表单控件样式 (input, textarea) */
+:root[data-theme='dark'] .form-control {
+  background-color: var(--bg-input);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+:root[data-theme='dark'] .form-control:focus {
+  border-color: var(--btn-primary-bg);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
+  background-color: var(--bg-input); /* 确保背景在聚焦时不会改变 */
+  color: var(--text-primary); /* 确保文本颜色在聚焦时不会改变 */
+}
+
+/* 暗色主题表格样式 */
+:root[data-theme='dark'] .table {
+  color: var(--text-primary); /* 表格文字颜色 */
+  background-color: var(--bg-secondary); /* 表格背景色 */
+  border-color: var(--border-color); /* 表格边框颜色 */
+}
+
+:root[data-theme='dark'] .table thead th {
+  border-bottom-color: var(--border-color);
+  background-color: var(--bg-tertiary); /* 表头背景色 */
+  color: var(--text-primary);
+}
+
+:root[data-theme='dark'] .table tbody tr {
+  background-color: var(--bg-secondary);
+}
+
+:root[data-theme='dark'] .table tbody tr:hover {
+  background-color: var(--bg-hover);
+}
+
+:root[data-theme='dark'] .table tbody tr td {
+  color: var(--text-primary); /* 确保表格内容文本颜色正常 */
+  border-top-color: var(--border-color);
+}
+
+/* 暗色主题 select 样式 */
+:root[data-theme='dark'] select.form-select {
+  background-color: var(--bg-input);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+  /* 针对下拉箭头颜色，可能需要特殊处理，取决于 Bootstrap 版本和浏览器 */
+  /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23f8f9fa' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e"); */
+}
+
+:root[data-theme='dark'] select.form-select:focus {
+  border-color: var(--btn-primary-bg);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+}
+
+/* 系统偏好暗色主题时的自动切换 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg-primary: #212529;
+    --bg-secondary: #2c3034;
+    --bg-tertiary: #343a40;
+    --bg-nav: #102458;
+    --bg-sidebar: #111;
+    --bg-card: #2c3034;
+    --bg-input: #343a40;
+    --bg-hover: rgba(255, 255, 255, 0.05);
+
+    --text-primary: #f8f9fa;
+    --text-secondary: #e9ecef;
+    --text-tertiary: #adb5bd;
+    --text-nav: #ffffff;
+    --text-sidebar: #f8f9fa;
+    --text-muted: #adb5bd;
+
+    --border-color: #495057;
+    --border-hover: #6c757d;
+
+    --btn-primary-bg: #0d6efd;
+    --btn-primary-color: #ffffff;
+    --btn-secondary-bg: #6c757d;
+    --btn-secondary-color: #ffffff;
+
+    --icon-folder: #ffc107;
+    --icon-file: #0d6efd;
+    --icon-image: #20c997;
+    --icon-video: #fd7e14;
+    --icon-audio: #d63384;
+    --icon-archive: #6f42c1;
+    --icon-code: #198754;
+    --icon-text: #0dcaf0;
+
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
+    --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.4);
+  }
+}

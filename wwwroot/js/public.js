@@ -293,32 +293,38 @@ function bindFileListEvents() {
  * @param {number} duration - 显示时长（毫秒）
  */
 
+
 function showNotification(message, type = 'info', duration = 3000) {
-  // 创建通知元素
-  const notification = document.createElement('div')
-  notification.className = `notification notification-${type}`
-  notification.textContent = message
-
-  // 添加到文档
-  const notificationContainer = document.getElementById('notification-container')
-  if (!notificationContainer) {
-    // 如果容器不存在，创建一个
-    const container = document.createElement('div')
-    container.id = 'notification-container'
-    document.body.appendChild(container)
-    container.appendChild(notification)
-  } else {
-    notificationContainer.appendChild(notification)
+  // type: 'success', 'error', 'warning', 'info'
+  const colorMap = {
+    success: 'bg-green-100 border-green-500 text-green-800 dark:bg-green-900 dark:text-green-200',
+    error: 'bg-red-100 border-red-500 text-red-800 dark:bg-red-900 dark:text-red-200',
+    warning: 'bg-yellow-100 border-yellow-500 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+    info: 'bg-blue-100 border-blue-500 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
+    danger: 'bg-red-100 border-red-500 text-red-800 dark:bg-red-900 dark:text-red-200',
   }
-
-  // 淡入效果
+  const notification = document.createElement('div')
+  notification.className = `fixed top-6 left-1/2 -translate-x-1/2 z-[1100] px-4 py-2 border-l-4 rounded shadow-lg min-w-[220px] max-w-xs transition-all duration-300 opacity-0 pointer-events-auto ${colorMap[type] || colorMap.info}`
+  notification.style.marginTop = '0.5rem'
+  notification.innerHTML = `<div class="flex items-center gap-2"><span class="flex-1">${message}</span><button type="button" class="ml-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" aria-label="关闭" onclick="this.closest('.fixed').remove()"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button></div>`
+  // 添加到文档
+  let notificationContainer = document.getElementById('notification-container')
+  if (!notificationContainer) {
+    notificationContainer = document.createElement('div')
+    notificationContainer.id = 'notification-container'
+    notificationContainer.className = 'fixed top-4 left-0 w-full flex flex-col items-center pointer-events-none z-[1100]'
+    document.body.appendChild(notificationContainer)
+  }
+  notificationContainer.appendChild(notification)
+  // 淡入
   setTimeout(() => {
-    notification.classList.add('show')
+    notification.classList.add('opacity-100')
+    notification.classList.remove('opacity-0')
   }, 10)
-
-  // 设置定时器，自动移除通知
+  // 自动移除
   setTimeout(() => {
-    notification.classList.remove('show')
+    notification.classList.remove('opacity-100')
+    notification.classList.add('opacity-0')
     setTimeout(() => {
       notification.remove()
     }, 300)
@@ -331,74 +337,35 @@ function showNotification(message, type = 'info', duration = 3000) {
  * @param {Function} onConfirm - 确认回调
  * @param {Function} onCancel - 取消回调
  */
+
 function confirmDialog(message, onConfirm, onCancel) {
-  // 检查是否有Bootstrap模态框API
-  if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
-    // 创建模态框元素
-    const modalEl = document.createElement('div')
-    modalEl.className = 'modal fade'
-    modalEl.id = 'confirmModal'
-    modalEl.tabIndex = -1
-    modalEl.setAttribute('aria-labelledby', 'confirmModalLabel')
-    modalEl.setAttribute('aria-hidden', 'true')
-
-    // 设置模态框内容
-    modalEl.innerHTML = `
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="confirmModalLabel">确认操作</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="关闭"></button>
-                    </div>
-                    <div class="modal-body">
-                        ${message}
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary" id="confirmBtn">确认</button>
-                    </div>
-                </div>
-            </div>
-        `
-
-    // 添加到文档
-    document.body.appendChild(modalEl)
-
-    // 创建模态框实例
-    const modal = new bootstrap.Modal(modalEl)
-
-    // 绑定确认事件
-    document.getElementById('confirmBtn').addEventListener('click', function () {
-      if (typeof onConfirm === 'function') {
-        onConfirm()
-      }
-      modal.hide()
-    })
-
-    // 模态框隐藏后事件
-    modalEl.addEventListener('hidden.bs.modal', function () {
-      modalEl.remove()
-    })
-
-    // 模态框取消事件
-    modalEl.addEventListener('hide.bs.modal', function () {
-      if (typeof onCancel === 'function') {
-        onCancel()
-      }
-    })
-
-    // 显示模态框
-    modal.show()
-  } else {
-    // 降级为原生确认对话框
-    if (window.confirm(message)) {
-      if (typeof onConfirm === 'function') {
-        onConfirm()
-      }
-    } else {
-      if (typeof onCancel === 'function') {
-        onCancel()
-      }
-    }
+  // Tailwind 风格自定义模态框
+  const modalId = 'tailwindConfirmModal_' + Date.now()
+  const modalEl = document.createElement('div')
+  modalEl.id = modalId
+  modalEl.className = 'fixed inset-0 z-[1200] flex items-center justify-center bg-black/40'
+  modalEl.innerHTML = `
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-xs relative animate-fadeIn">
+      <div class="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700">
+        <h5 class="text-lg font-semibold">确认操作</h5>
+        <button class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700" aria-label="关闭" onclick="document.getElementById('${modalId}').remove()">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-4 text-gray-700 dark:text-gray-200">${message}</div>
+      <div class="flex justify-end gap-2 px-4 py-2 border-t border-gray-200 dark:border-gray-700">
+        <button type="button" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600" id="${modalId}_cancel">取消</button>
+        <button type="button" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" id="${modalId}_ok">确认</button>
+      </div>
+    </div>
+  `
+  document.body.appendChild(modalEl)
+  document.getElementById(`${modalId}_ok`).onclick = function () {
+    if (typeof onConfirm === 'function') onConfirm()
+    modalEl.remove()
+  }
+  document.getElementById(`${modalId}_cancel`).onclick = function () {
+    if (typeof onCancel === 'function') onCancel()
+    modalEl.remove()
   }
 }

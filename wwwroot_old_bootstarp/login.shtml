@@ -1,0 +1,126 @@
+<script>
+  function isTokenExpired(expiresTimestamp) {
+    if (!expiresTimestamp) return true
+    // 当前时间戳（毫秒）
+    const now = Date.now()
+    // 过期时间戳（毫秒）
+    var expires = parseInt(expiresTimestamp)
+    expires = expires * 1000
+    // 如果过期时间小于当前时间，则认为已过期
+    return expires < now
+  }
+
+  function checkAuthStatus() {
+    const refreshToken = localStorage.getItem('jwt_refresh_token');
+    const refreshTokenExpires = localStorage.getItem('jwt_refresh_token_expires');
+
+    // 如果没有refresh token，则未认证
+    if (!refreshToken) {
+      console.warn('未找到refresh token');
+      return false;
+    }
+
+    // 检查refresh token是否过期
+    if (isTokenExpired(refreshTokenExpires)) {
+      console.warn('refresh token已过期');
+      return false;
+    }
+
+    return true;
+  }
+
+  if (checkAuthStatus()) {
+    // window.location.href = '/dashboard';
+    window.location.href = './nascore.shtml';
+  }
+</script>
+
+<!--#include file="include/meta.html" -->
+<link rel="stylesheet" href="css/theme_login.css">
+<!--#include file="include/meta_theme_css.html" -->
+<!--#include file="include/meta_js.html" -->
+
+<!-- 添加Toasts容器 -->
+<div class="toast-container position-fixed top-0 start-0 p-3">
+  <div id="rememberPasswordToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header bg-warning">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      <strong class="me-auto">安全提示</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      <p class="mb-2">记住密码可能存在安全风险？</p>
+      <div class="d-flex justify-content-end gap-2">
+
+        <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="toast" id="confirmRemember">我知道了</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="login-container">
+  <div class="login-form card shadow">
+    <div class="login-logo">
+      <img src="images/logo.webp" />
+      <h1 class=" mt-3">nascore</h1>
+    </div>
+
+    <!-- 已保存账号列表界面 -->
+    <div id="saved-accounts-section" style="display:none">
+      <div class="saved-accounts-list mb-3">
+        <!-- 这里会动态插入已保存的账号列表 -->
+      </div>
+
+      <div class="d-grid gap-2">
+        <button type="button" class="btn btn-secondary" onclick="switchToManualLogin()">
+          <i class="bi bi-pencil-square me-1"></i>手动输入
+        </button>
+      </div>
+    </div>
+
+    <!-- 手动登录表单 -->
+    <form id="login-form">
+      <div class="mb-3">
+        <label for="username" class="form-label">用户名</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          <input type="text" class="form-control" id="username" placeholder="请输入用户名" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">密码</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input type="password" class="form-control" id="password" placeholder="请输入密码" required>
+        </div>
+      </div>
+
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="remember-password">
+        <label class="form-check-label" for="remember-password">记住密码</label>
+      </div>
+
+      <div class="d-grid gap-2 mt-4">
+        <button type="submit" class="btn btn-primary btn-lg">登录</button>
+      </div>
+    </form>
+
+    <div class="mt-4 text-center">
+      <!-- 新增：切换回已记录账号列表按钮 -->
+      <button type="button" class="btn btn-sm btn-outline-secondary me-2" id="backToSavedAccountsBtn"
+        style="display: none;">
+        <i class="bi bi-person-lines-fill me-1"></i>选择已记录账号
+      </button>
+      <button class="btn btn-sm btn-outline-secondary" type="button" data-action="open-theme-modal">
+        <i class="bi bi-palette me-1"></i>主题设置
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/pswCrypto.js"></script>
+<script src="js/login.js"></script>
+
+<!--#include file="include/footer.html" -->
