@@ -10,13 +10,8 @@ import (
 	"go.uber.org/zap"
 )
 
-/*
- * go run cmd/demo/main.go  /home/yh/myworkspace/nas-core/code-private/nascore_v3/nascore.toml  http://127.0.0.1:9000
- *
- */
-
 func main() {
-	configPath := os.Args[1]     // /home/yh/myworkspace/nas-core/code-private/nascore_v3/nascore.toml
+	configPath := os.Args[1]
 	webui.ServerUrl = os.Args[2] // http://127.0.0.1:9000/
 
 	nsCfg, err := system_config.LoadConfig(configPath)

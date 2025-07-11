@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     editUserModal.hide()
     window.updateGlobalSettingsForm() // 更新表单
-    window.showNotification('用户更新成功', 'success')
+    window.showNotification('用户已更新，请保存。', 'success')
   })
 
   // 当添加用户模态框隐藏时，重置表单
