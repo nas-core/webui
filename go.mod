@@ -5,7 +5,7 @@ go 1.24.4
 require (
 	github.com/nas-core/nascore v0.0.0-20250629094159-1f0c921c5177
 	github.com/nas-core/nascore/nascore_auth v0.0.0-20250712102845-a2f52b31b3c1
-	github.com/nas-core/nascore/nascore_handler_http v0.0.0-20250712121242-8b9739d09a88
+	github.com/nas-core/nascore/nascore_handler_http v0.0.0-20250712161027-9a2a956c8ed3
 	github.com/nas-core/nascore/nascore_util v0.0.0-20250712121242-8b9739d09a88
 	github.com/tdewolff/minify/v2 v2.23.8
 	go.uber.org/zap v1.27.0

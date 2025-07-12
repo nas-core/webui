@@ -43,11 +43,11 @@ func Webui_handler(nsCfg *system_config.SysCfg, logger *zap.SugaredLogger, qpsCo
 		if r.URL.Path == "system.shtml" {
 			userInfo, err := user_helper.ValidateTokenAndGetUserInfo(r, nsCfg)
 			if err != nil {
-				index_and_favicon.RenderPage(w, "token err ", "cant get user from ValidateTokenAndGetUserInfo", "")
+				index_and_favicon.RenderPage(w, "token err ", "cant get user from ValidateTokenAndGetUserInfo", "", "", "")
 				return
 			}
 			if !userInfo.IsAdmin {
-				index_and_favicon.RenderPage(w, "you are not admin ", "pls relogin", "")
+				index_and_favicon.RenderPage(w, "you are not admin ", "pls relogin", "", "", "")
 				return
 			}
 		}
