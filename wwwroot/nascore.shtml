@@ -51,7 +51,6 @@
     <!-- 浮动剪贴板 -->
     <!--#include file="include/floating_clipboard.html" -->
 
-    <script src="js/api.js"></script>
     <script src="js/fileOperations.js"></script>
     <script src="js/compress_extract.js"></script>
     <!--#include file="include/edit.html" -->

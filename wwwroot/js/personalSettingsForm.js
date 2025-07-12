@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       // 发送密码修改请求
-      const token = localStorage.getItem('jwt_access_token')
+      const token = TokenManager.getAccessToken()
       console.log('获取到的token:', token ? '存在' : '不存在')
 
       if (!token) {

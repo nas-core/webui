@@ -33,8 +33,8 @@
   function checkAuth() {
     try {
       // 获取refresh token和过期时间
-      const refreshToken = localStorage.getItem('jwt_refresh_token')
-      const refreshTokenExpires = localStorage.getItem('jwt_refresh_token_expires')
+      const refreshToken = TokenManager.getRefreshToken()
+      const refreshTokenExpires = TokenManager.getRefreshTokenExpires()
 
       // 如果没有refresh token，则未认证
       if (!refreshToken) {
@@ -57,25 +57,11 @@
   }
 
   /**
-   * 清除所有token
-   */
-  function clearTokens() {
-    try {
-      localStorage.removeItem('jwt_access_token')
-      localStorage.removeItem('jwt_access_token_expires')
-      localStorage.removeItem('jwt_refresh_token')
-      localStorage.removeItem('jwt_refresh_token_expires')
-    } catch (error) {
-      console.error('清除token时发生错误:', error)
-    }
-  }
-
-  /**
    * 重定向到登录页面
    */
   function redirectToLogin() {
     // 清除所有token
-    clearTokens()
+    TokenManager.clear()
     // 保存当前页面URL，以便登录后返回
     const currentPath = window.location.pathname
     if (!currentPath.endsWith('login.shtml')) {

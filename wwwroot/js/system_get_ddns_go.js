@@ -42,7 +42,7 @@ async function resetDDNSGOPassword() {
       { needToken: true, method: 'GET' } // 后端 Handers_admin_caddyreload 是GET请求
     )
 
-    // 根据后端返回的code判断是sendError还是sendJSON
+    // 根据后端返回的code判断是response_yh.SendError还是response_yh.SendJSON
     if (res.code !== 1) {
       notificationMessage = res.message || '未知错误'
       if (res.data) {
@@ -50,7 +50,7 @@ async function resetDDNSGOPassword() {
       }
       window.showNotification(' 重置失败 ' + notificationMessage, 'danger')
     } else {
-      // 如果code是1，表示后端通过sendJSON返回了Caddy命令的输出
+      // 如果code是1，表示后端通过response_yh.SendJSON返回了Caddy命令的输出
       if (res.data) {
         notificationMessage = '执行完成: ' + res.data
       } else if (res.message) {

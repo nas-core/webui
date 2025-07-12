@@ -50,7 +50,7 @@
 
 
   window.onload = function () {
-    const token = localStorage.getItem('jwt_access_token');
+    const token = TokenManager.getAccessToken();
     if (token) {
       try {
         const payload = JSON.parse(atob(token.split('.')[1]));

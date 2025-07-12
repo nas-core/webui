@@ -101,7 +101,7 @@
           },
 
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('jwt_access_token')}`,
+            Authorization: `Bearer ${TokenManager.getAccessToken()}`,
           },
 
           chunksUploaded: (file, done) => {
@@ -774,7 +774,7 @@
         await new Promise((resolve) => setTimeout(resolve, 500))
 
         const filePath = path.endsWith('/') ? path + file.name : path + '/' + file.name
-        const accessToken = localStorage.getItem('jwt_access_token')
+        const accessToken = TokenManager.getAccessToken()
         const response = await fetch(`{{.ServerUrl}}/@api/file/list?path=${encodeURIComponent(filePath)}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,

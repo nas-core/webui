@@ -4,6 +4,13 @@
     <div class="settingContainer">
       <h3 class="mb-4">NasCore扩展功能 </h3>
       <div class="mb-3">
+        <label for="UnixSocketFilePath" class="form-label">Socket文件路径目录 <small
+            class="form-text text-muted">用于和进程之间通讯，Linux下一般指定为/tmp/nascore-socket/,
+            Windows下一般指定为D:\nascore-socket\ </small></label>
+        <input type="text" class="form-control" id="UnixSocketFilePath" data-bind="Server.UnixSocketFilePath">
+      </div>
+
+      <div class="mb-3">
         <label for="UserAccessTokenExpires" class="form-label">NasCoreID</label>
         <input type="text" class="form-control" id="UserAccessTokenExpires" data-bind="NascoreExt.UserID">
       </div>
@@ -17,6 +24,7 @@
         <small class="form-text text-muted"> 如果你没有 NasCoreID 和 NasCoreKey ,请先访问NasCore官网获取。
         </small>
       </div>
+
 
     </div>
   </div>

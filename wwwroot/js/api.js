@@ -5,10 +5,10 @@
 
 // Token存储键名
 const TOKEN_KEY = {
-  ACCESS: 'jwt_access_token',
-  ACEXPIRES: 'jwt_access_token_expires',
-  REFRESH: 'jwt_refresh_token',
-  RfEXPIRES: 'jwt_refresh_token_expires',
+  ACCESS: 'nascore_jwt_access_token',
+  ACEXPIRES: 'nascore_jwt_access_token_expires',
+  REFRESH: 'nascore_jwt_refresh_token',
+  RfEXPIRES: 'nascore_jwt_refresh_token_expires',
 }
 
 // 创建axios实例
@@ -43,7 +43,14 @@ baseRequest.interceptors.response.use(
 const TokenManager = {
   setTokens(tokens) {
     localStorage.setItem(TOKEN_KEY.ACCESS, tokens.access_token)
+
+    const accessExpires = new Date(parseInt(tokens.access_token_expires) * 1000).toUTCString()
+    document.cookie = `${TOKEN_KEY.ACCESS}=${tokens.access_token}; path=/; expires=${accessExpires}`
+
     localStorage.setItem(TOKEN_KEY.REFRESH, tokens.refresh_token)
+    const refreshExpires = new Date(parseInt(tokens.refresh_token_expires) * 1000).toUTCString()
+    document.cookie = `${TOKEN_KEY.REFRESH}=${tokens.refresh_token}; path=/; expires=${refreshExpires}`
+
     localStorage.setItem(TOKEN_KEY.ACEXPIRES, tokens.access_token_expires)
     localStorage.setItem(TOKEN_KEY.RfEXPIRES, tokens.refresh_token_expires)
   },
@@ -55,8 +62,14 @@ const TokenManager = {
   getRefreshToken() {
     return localStorage.getItem(TOKEN_KEY.REFRESH)
   },
-
+  getRefreshTokenExpires() {
+    return localStorage.getItem(TOKEN_KEY.RfEXPIRES)
+  },
   clear() {
+    document.cookie = `${TOKEN_KEY.ACCESS}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+    document.cookie = `${TOKEN_KEY.REFRESH}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+    document.cookie = `${TOKEN_KEY.ACEXPIRES}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+    document.cookie = `${TOKEN_KEY.RfEXPIRES}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
     localStorage.removeItem(TOKEN_KEY.ACCESS)
     localStorage.removeItem(TOKEN_KEY.REFRESH)
     localStorage.removeItem(TOKEN_KEY.ACEXPIRES)

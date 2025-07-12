@@ -7,6 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/nas-core/nascore/nascore_auth/user/user_helper"
+	"github.com/nas-core/nascore/nascore_handler_http/index_and_favicon"
 	"github.com/nas-core/nascore/pkgs/isDevMode"
 	"github.com/nas-core/webui/webuiLib"
 
@@ -37,6 +39,19 @@ func Webui_handler(nsCfg *system_config.SysCfg, logger *zap.SugaredLogger, qpsCo
 			w.Write([]byte("Webui/api service is disabled"))
 			return
 		}
+
+		if r.URL.Path == "system.shtml" {
+			userInfo, err := user_helper.ValidateTokenAndGetUserInfo(r, nsCfg)
+			if err != nil {
+				index_and_favicon.RenderPage(w, "token err ", "cant get user from ValidateTokenAndGetUserInfo", "")
+				return
+			}
+			if !userInfo.IsAdmin {
+				index_and_favicon.RenderPage(w, "you are not admin ", "pls relogin", "")
+				return
+			}
+		}
+
 		var basePatch string
 		if isDevMode.IsDevMode() {
 			basePatch = "/home/yh/myworkspace/nas-core/CodeSpace/webui/wwwroot/"

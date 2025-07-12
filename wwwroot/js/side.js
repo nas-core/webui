@@ -12,13 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
  * 绑定侧边栏操作
  */
 function bindSidebarActions() {
-  console.log('bindSidebarActions 开始执行')
+  //console.log('bindSidebarActions 开始执行')
   const newFolderButton = document.querySelector('[data-action="new-folder"] a')
   const newFileButton = document.querySelector('[data-action="new-file"] a')
 
-  console.log('新建文件夹按钮:', newFolderButton)
-  console.log('新建文件按钮:', newFileButton)
-  console.log('FileOperations对象:', window.FileOperations)
+  //console.log('新建文件夹按钮:', newFolderButton)
+  //console.log('新建文件按钮:', newFileButton)
+  //console.log('FileOperations对象:', window.FileOperations)
 
   // 新建文件夹
   if (newFolderButton) {
